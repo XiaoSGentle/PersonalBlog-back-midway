@@ -51,8 +51,8 @@ export default {
     // 腾讯云存储桶
     cos: {
         client: {
-            SecretId: 'AKIDQhpiBQQCk37xZw4xdT4RaU9ZkiRyIOdy',
-            SecretKey: 'IND0jGcotnZ7RXO9h2FNJDyVntkNl02C',
+            SecretId: 'AKID***********Ody',
+            SecretKey: 'IND0jGc*********DyVntkNl02C',
         },
     },
     // 跨域
