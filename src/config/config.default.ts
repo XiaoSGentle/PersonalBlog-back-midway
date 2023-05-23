@@ -51,8 +51,8 @@ export default {
     // 腾讯云存储桶
     cos: {
         client: {
-            SecretId: 'AKID***********Ody',
-            SecretKey: 'IND0jGc*********DyVntkNl02C',
+            SecretId: 'AKIDQhpiBQQCk37xZw4xdT4RaU9ZkiRyIOdy',
+            SecretKey: 'IND0jGcotnZ7RXO9h2FNJDyVntkNl02C',
         },
     },
     // 跨域
@@ -69,7 +69,7 @@ export default {
         // mode: UploadMode, 默认为file，即上传到服务器临时目录，可以配置为 stream
         mode: 'file',
         // fileSize: string, 最大上传文件大小，默认为 10mb
-        fileSize: '1000mb',
+        fileSize: '10mb',
         // whitelist: string[]，文件扩展名白名单
         // 扩展名白名单
         whitelist: null,

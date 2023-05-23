@@ -22,7 +22,6 @@ export class ReportMiddleware implements IMiddleware<Context, NextFunction> {
                 // eslint-disable-next-line prettier/prettier
                 `Report in "src/middleware/report.middleware.ts", rt = ${Date.now() - startTime}ms`
             );
-
             const logIn = new SysLog();
             logIn.port = ctx.url;
             logIn.ip = ReqUtil.getIp(ctx);

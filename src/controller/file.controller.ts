@@ -20,4 +20,8 @@ export class HomeController {
             await this.fileService.uploadCos(filePath, fileName)
         );
     }
+    // @Post('/file')
+    // async getImage(imageName: string): Promise<Response> {
+    //     return new Response(Image(), null);
+    // }
 }
