@@ -15,7 +15,7 @@ $ open Swagger文档 http://localhost:8888/swagger-ui/index.html
 
 ## 前端基于Vue+Elemen-ui
 
-参见 [https://github.com/XiaoSGentle/PersonalBlog-front-vue][XiaosPerFront]。
+参见 [https://github.com/XiaoSGentle/PersonalBlog-front-vue][XiaosPerFront]
 
 
 # 开发日志
