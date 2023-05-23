@@ -20,7 +20,7 @@ $ open Swagger文档 http://localhost:8888/swagger-ui/index.html
 
 # 开发日志
 
-## V1.0 2023.05.16-2023.05.19
+## V0.1 2023.05.16-2023.05.19
 
 * 项目框架搭建
 * 熟悉MidWay
