@@ -3,7 +3,7 @@
 
 ## ❤️MidWay快速入门
 
-参见 [midway 文档][midway]。
+参见 [https://midwayjs.org/docs/intro]
 
 ### 启动配置
 
