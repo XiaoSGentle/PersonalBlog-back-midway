@@ -13,7 +13,7 @@ $ npm run dev
 $ open Swagger文档 http://localhost:8888/swagger-ui/index.html
 ```
 
-## 前端基于Vue+Elemen-ui
+## 前端基于Vue+Element-ui
 
 参见 [https://github.com/XiaoSGentle/PersonalBlog-front-vue]
 
