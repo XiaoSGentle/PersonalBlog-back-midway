@@ -10,6 +10,7 @@
     "@midwayjs/cross-domain": "^3.11.6",
     "@midwayjs/decorator": "^3.0.0",
     "@midwayjs/info": "^3.0.0",
+    "@midwayjs/jwt": "3",
     "@midwayjs/koa": "^3.0.0",
     "@midwayjs/logger": "^2.14.0",
     "@midwayjs/oss": "^3.11.6",
