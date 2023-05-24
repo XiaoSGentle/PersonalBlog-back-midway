@@ -18,7 +18,7 @@ $ open Swagger文档 http://localhost:8888/swagger-ui/index.html
 参见 [https://github.com/XiaoSGentle/PersonalBlog-front-vue]
 
 
-# 开发日志
+# 🎫开发日志
 
 ## V0.1 2023.05.16-2023.05.19
 
@@ -30,7 +30,7 @@ $ open Swagger文档 http://localhost:8888/swagger-ui/index.html
 
 ## V0.2 2023.05.22-2023.05.26
 
-阶段目标：
+阶段目标：暂无
 
 ### v0.2.1 2023.05.24
 * 添加JWt权限认证
