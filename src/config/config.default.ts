@@ -36,8 +36,8 @@ export default {
     },
     // jwt配置
     jwt: {
-        secret: 'reacool',
-        expiresIn: 60 * 60 * 24,
+        secret: 'reacool2023',
+        expiresIn: '168h',
     },
     // swagger配置
     swagger: {

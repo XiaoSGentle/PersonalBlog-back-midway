@@ -1,4 +1,5 @@
-import { Provide } from '@midwayjs/core';
+import { Inject, Provide } from '@midwayjs/core';
+import { JwtService } from '@midwayjs/jwt';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
 import { CerateUserParam } from '../dto/user/CreateUserParam';
@@ -8,6 +9,9 @@ import { SysUser } from '../entity/SysUser';
 export class UserService {
     @InjectEntityModel(SysUser)
     userModel: Repository<SysUser>;
+
+    @Inject()
+    jwtService: JwtService;
     /**
      * 用户登录
      * @param loginParam 登录参数
@@ -15,7 +19,7 @@ export class UserService {
      */
     async Login(loginParam: LoginParam) {
         const username = loginParam.username;
-        const result = await this.userModel.find({
+        const result = await this.userModel.findOne({
             where: { username: username },
         });
         return result;

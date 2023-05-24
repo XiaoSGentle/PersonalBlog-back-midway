@@ -1,7 +1,7 @@
 // 定义错误代码返回
 export enum ApiMsg {
     LOGIN_SUCCESS = '登陆成功',
-    UNAUTHORIZED = '身份认证失败',
+    UNAUTHORIZED = '身份认证失败,请重新登录',
     NO_LOGIN = '未登录',
 }
 export enum ApiCode {

@@ -20,12 +20,8 @@ export class ApiResult {
     static fail(code?: any, msg?: any): resultFormat {
         const result = new resultFormat();
         result.success = false;
-        if (check(msg)) {
-            result.msg = msg;
-        }
-        if (check(code)) {
-            result.msg = msg;
-        }
+        result.status = code;
+        result.msg = msg;
         return result;
     }
 }

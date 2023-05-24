@@ -20,8 +20,16 @@ export class FunNote extends BaseEntity {
     })
     creatorUuid: string | null;
 
-    @Column('int', { name: 'pid', nullable: true, comment: '父id' })
-    pid: number | null;
+    @Column('varchar', {
+        name: 'classification_uuid',
+        nullable: true,
+        comment: '分类uuid',
+        length: 20,
+    })
+    classificationUuid: string | null;
+
+    @Column('text', { name: 'tags', nullable: true, comment: '标签' })
+    tags: string | null;
 
     @Column('text', { name: 'title', nullable: true, comment: '标题' })
     title: string | null;

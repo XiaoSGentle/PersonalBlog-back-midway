@@ -7,6 +7,6 @@ import { ApiResult } from '../util/ApiResult/ApiResult';
 @Catch(MidwayValidationError)
 export class ValidateErrorFilter {
     async catch(err: MidwayValidationError, ctx: Context) {
-        return ApiResult.fail(err.message, ApiCode.VALIDATION_ERROR);
+        ctx.body = ApiResult.fail(err.message, ApiCode.VALIDATION_ERROR);
     }
 }

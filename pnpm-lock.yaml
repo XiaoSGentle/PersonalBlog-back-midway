@@ -8,6 +8,7 @@ specifiers:
   '@midwayjs/cross-domain': ^3.11.6
   '@midwayjs/decorator': ^3.0.0
   '@midwayjs/info': ^3.0.0
+  '@midwayjs/jwt': '3'
   '@midwayjs/koa': ^3.0.0
   '@midwayjs/logger': ^2.14.0
   '@midwayjs/mock': ^3.0.0
@@ -38,6 +39,7 @@ dependencies:
   '@midwayjs/cross-domain': registry.npmmirror.com/@midwayjs/cross-domain/3.11.6
   '@midwayjs/decorator': registry.npmmirror.com/@midwayjs/decorator/3.11.6
   '@midwayjs/info': registry.npmmirror.com/@midwayjs/info/3.11.6
+  '@midwayjs/jwt': registry.npmmirror.com/@midwayjs/jwt/3.11.6
   '@midwayjs/koa': registry.npmmirror.com/@midwayjs/koa/3.11.6
   '@midwayjs/logger': registry.npmmirror.com/@midwayjs/logger/2.17.0
   '@midwayjs/oss': registry.npmmirror.com/@midwayjs/oss/3.11.6
@@ -1193,6 +1195,15 @@ packages:
       picomatch: registry.npmmirror.com/picomatch/2.3.1
     dev: false
 
+  registry.npmmirror.com/@midwayjs/jwt/3.11.6:
+    resolution: {integrity: sha512-UiPCqKzEEYRTU7h0No066gAO8e+BGF7ZjFKe6p4UNLv0sImeHD3VYfp0rtQi5QuN/S9mzRFOTxXw+7iw02jqJA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@midwayjs/jwt/-/jwt-3.11.6.tgz}
+    name: '@midwayjs/jwt'
+    version: 3.11.6
+    dependencies:
+      '@types/jsonwebtoken': registry.npmmirror.com/@types/jsonwebtoken/9.0.2
+      jsonwebtoken: registry.npmmirror.com/jsonwebtoken/9.0.0
+    dev: false
+
   registry.npmmirror.com/@midwayjs/koa/3.11.6:
     resolution: {integrity: sha512-/MrhJ4vX73PgzRfTgfU9nu+VyA766iSheGaLRZLrdP965eHkv2Phb5964BkfSt6wns1s+Fw3mHunbSdcvMJ7NQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@midwayjs/koa/-/koa-3.11.6.tgz}
     name: '@midwayjs/koa'
@@ -1661,6 +1672,14 @@ packages:
     name: '@types/json5'
     version: 0.0.29
     dev: true
+
+  registry.npmmirror.com/@types/jsonwebtoken/9.0.2:
+    resolution: {integrity: sha512-drE6uz7QBKq1fYqqoFKTDRdFCPHd5TCub75BM+D+cMx7NU9hUz7SESLfC2fSCXVFMO5Yj8sOWHuGqPgjc+fz0Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/jsonwebtoken/-/jsonwebtoken-9.0.2.tgz}
+    name: '@types/jsonwebtoken'
+    version: 9.0.2
+    dependencies:
+      '@types/node': registry.npmmirror.com/@types/node/14.18.47
+    dev: false
 
   registry.npmmirror.com/@types/keygrip/1.0.2:
     resolution: {integrity: sha512-GJhpTepz2udxGexqos8wgaBx4I/zWIDPh/KOGEwAqtuGDkOUJu5eFvwmdBX4AmB8Odsr+9pHCQqiAqDL/yKMKw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/keygrip/-/keygrip-1.0.2.tgz}
@@ -2501,6 +2520,12 @@ packages:
       node-int64: registry.npmmirror.com/node-int64/0.4.0
     dev: true
 
+  registry.npmmirror.com/buffer-equal-constant-time/1.0.1:
+    resolution: {integrity: sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz}
+    name: buffer-equal-constant-time
+    version: 1.0.1
+    dev: false
+
   registry.npmmirror.com/buffer-from/1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/buffer-from/-/buffer-from-1.1.2.tgz}
     name: buffer-from
@@ -3290,6 +3315,14 @@ packages:
     dependencies:
       jsbn: registry.npmmirror.com/jsbn/0.1.1
       safer-buffer: registry.npmmirror.com/safer-buffer/2.1.2
+    dev: false
+
+  registry.npmmirror.com/ecdsa-sig-formatter/1.0.11:
+    resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz}
+    name: ecdsa-sig-formatter
+    version: 1.0.11
+    dependencies:
+      safe-buffer: registry.npmmirror.com/safe-buffer/5.2.1
     dev: false
 
   registry.npmmirror.com/ee-first/1.1.1:
@@ -5401,6 +5434,18 @@ packages:
     optionalDependencies:
       graceful-fs: registry.npmmirror.com/graceful-fs/4.2.11
 
+  registry.npmmirror.com/jsonwebtoken/9.0.0:
+    resolution: {integrity: sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jsonwebtoken/-/jsonwebtoken-9.0.0.tgz}
+    name: jsonwebtoken
+    version: 9.0.0
+    engines: {node: '>=12', npm: '>=6'}
+    dependencies:
+      jws: registry.npmmirror.com/jws/3.2.2
+      lodash: registry.npmmirror.com/lodash/4.17.21
+      ms: registry.npmmirror.com/ms/2.1.3
+      semver: registry.npmmirror.com/semver/7.5.1
+    dev: false
+
   registry.npmmirror.com/jsprim/1.4.2:
     resolution: {integrity: sha512-P2bSOMAc/ciLz6DzgjVlGJP9+BrJWu5UDGK70C2iweC5QBIeFf0ZXRvGjEj2uYgrY2MkAAhsSWHDWlFtEroZWw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jsprim/-/jsprim-1.4.2.tgz}
     name: jsprim
@@ -5417,6 +5462,25 @@ packages:
     resolution: {integrity: sha512-OYWlK0j+roh+eyaMROlNbS5cd5R25Y+IUpdl7cNdB8HNrkgwQzIS7L9MegxOiWNBj9dQhA/yAxiMwCC5mwNoBw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jstoxml/-/jstoxml-2.2.9.tgz}
     name: jstoxml
     version: 2.2.9
+    dev: false
+
+  registry.npmmirror.com/jwa/1.4.1:
+    resolution: {integrity: sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jwa/-/jwa-1.4.1.tgz}
+    name: jwa
+    version: 1.4.1
+    dependencies:
+      buffer-equal-constant-time: registry.npmmirror.com/buffer-equal-constant-time/1.0.1
+      ecdsa-sig-formatter: registry.npmmirror.com/ecdsa-sig-formatter/1.0.11
+      safe-buffer: registry.npmmirror.com/safe-buffer/5.2.1
+    dev: false
+
+  registry.npmmirror.com/jws/3.2.2:
+    resolution: {integrity: sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jws/-/jws-3.2.2.tgz}
+    name: jws
+    version: 3.2.2
+    dependencies:
+      jwa: registry.npmmirror.com/jwa/1.4.1
+      safe-buffer: registry.npmmirror.com/safe-buffer/5.2.1
     dev: false
 
   registry.npmmirror.com/keygrip/1.1.0:
