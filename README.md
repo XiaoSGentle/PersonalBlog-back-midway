@@ -1,29 +1,39 @@
-# my_midway_project
+# 🚀 个人博客后端接口部分 MidWay.js
 
-## QuickStart
 
-<!-- add docs here for user -->
+## ❤️MidWay快速入门
 
-see [midway docs][midway] for more detail.
+参见 [https://midwayjs.org/docs/intro]
 
-### Development
+### 启动配置
 
 ```bash
 $ npm i
 $ npm run dev
-$ open http://localhost:7001/
+$ open Swagger文档 http://localhost:8888/swagger-ui/index.html
 ```
 
-### Deploy
+## 前端基于Vue+Element-ui
 
-```bash
-$ npm start
-```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
+参见 [https://github.com/XiaoSGentle/PersonalBlog-front-vue]
 
 
-[midway]: https://midwayjs.org
+# 🎫开发日志
+
+## V0.1 2023.05.16-2023.05.19
+
+* 项目框架搭建
+* 熟悉MidWay
+* 数据库搭建
+* 模块设计
+* 部分接口编写
+
+## V0.2 2023.05.22-2023.05.26
+
+阶段目标：暂无
+
+### v0.2.1 2023.05.24
+* 添加JWt权限认证
+* 添加部分异常捕获
+* 优化部分代码
+
