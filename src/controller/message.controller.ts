@@ -5,6 +5,7 @@ import { addMessageParam } from '../dto/message/addMessageParam';
 import { MessageService } from '../service/message.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { Pageparam } from '../util/Page/PageParam';
+import { JwtMiddleware } from '../middleware/jwt.middleware';
 
 @ApiTags('留言')
 @Controller('/message')
@@ -16,7 +17,7 @@ export class MessageController {
     messageService: MessageService;
 
     @ApiOperation({ summary: '获取所有留言' })
-    @Post('/getAllMessage')
+    @Post('/getAllMessage', { middleware: [JwtMiddleware] })
     @ApiBody({
         type: Pageparam,
     })

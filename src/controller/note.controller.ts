@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Post } from '@midwayjs/core';
+import { Body, Controller, Get, Inject, Post, Query } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import {
     ApiBasicAuth,
@@ -6,10 +6,12 @@ import {
     ApiOperation,
     ApiTags,
 } from '@midwayjs/swagger';
-import { CreateNoteParam } from '../dto/note/CreateNoteParam';
+import { log } from 'console';
+import { AddOrUpdateNoteParam } from '../dto/note/AddOrUpdateNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
 import { NoteService } from '../service/note.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
+import { Pageparam } from '../util/Page/PageParam';
 
 @ApiBasicAuth()
 @ApiTags('笔记')
@@ -29,17 +31,61 @@ export class NoteController {
     async getNotes(@Body() param: GetNoteParam) {
         return ApiResult.ok(await this.noteService.getNoteList(param));
     }
+
+    @ApiOperation({ summary: '根据UUID获取笔记详情' })
+    @Get('/getNotesByUuid')
+    async getNotesByUuid(@Query('uuid') uuid: string) {
+        return ApiResult.ok(
+            await this.noteService.noteModel.findOne({ where: { uuid: uuid } })
+        );
+    }
+
     /**
-     * 添加
-     * @param param CreateNoteParam
-     * @returns NoteList
+     * 更新代码
+     * @param param CreateParam
+     * @returns ApiResult
      */
-    @ApiOperation({ summary: '添加笔记' })
-    @Post('/addOrUpdateNote')
+    @ApiOperation({ summary: '新增笔记' })
+    @Get('/addNote')
+    async addNote(@Query('createUuid') createUuid: string) {
+        log(createUuid);
+        return ApiResult.ok(await this.noteService.addNote(createUuid));
+    }
+    /**
+     * 更新代码
+     * @param param CreateParam
+     * @returns ApiResult
+     */
+    @ApiOperation({ summary: '更新笔记' })
+    @Post('/updateNote')
     @ApiBody({
-        type: CreateNoteParam,
+        type: AddOrUpdateNoteParam,
     })
-    async addOrUpdateNote(@Body() param: CreateNoteParam) {
-        return ApiResult.ok(await this.noteService.addOrUpdateNote(param));
+    async updateNote(@Body() param: AddOrUpdateNoteParam) {
+        return ApiResult.ok(this.noteService.updateNote(param));
+    }
+
+    // TODO: 优化按条件查询
+    /**
+     * 获取所有笔记
+     * @param pageParam 分页参数
+     * @returns 结果
+     */
+    @ApiOperation({ summary: '获取笔记' })
+    @Post('/getAllNote')
+    @ApiBody({
+        type: Pageparam,
+    })
+    async getAllMessage(@Body() pageParam: Pageparam) {
+        return ApiResult.ok(await this.noteService.getAllNote(pageParam));
+    }
+    /**
+     * 获取所有笔记分类标签
+     * @returns 结果
+     */
+    @ApiOperation({ summary: '获取笔记分类标签' })
+    @Get('/getAllNoteClassify')
+    async getAllNoteClassify() {
+        return ApiResult.ok(await this.noteService.getAllNoteClassify());
     }
 }

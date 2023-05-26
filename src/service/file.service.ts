@@ -1,4 +1,4 @@
-import { Inject, Provide } from '@midwayjs/core';
+import { Config, Inject, Provide } from '@midwayjs/core';
 import { COSService } from '@midwayjs/cos';
 import { InfoService } from '@midwayjs/info';
 
@@ -9,6 +9,9 @@ export class FileService {
 
     @Inject()
     inforService: InfoService;
+
+    @Config('userconfig')
+    userConfig: any;
     /**
      *  上传文件至cos
      * @param filePath 本地文件地址
@@ -16,14 +19,12 @@ export class FileService {
      * @returns 公网访问地址
      */
     async uploadCos(filePath: string, fileName: string): Promise<string> {
-        const re: any = this.inforService.midwayConfig().info;
-        const config: any = JSON.parse(re.userconfig).cos;
         const upCosResult = await this.cosService.sliceUploadFile({
-            Bucket: config.Bucket,
-            Region: config.Region,
+            Bucket: this.userConfig.cos.Bucket,
+            Region: this.userConfig.cos.Region,
             Key: fileName,
             FilePath: filePath,
         });
-        return upCosResult.Location;
+        return 'https://' + upCosResult.Location;
     }
 }

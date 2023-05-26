@@ -7,6 +7,7 @@ import { LoginParam } from '../dto/user/LoginParam';
 import { UserService } from '../service/user.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { JwtUtil } from '../util/Jwt/Jwt';
+import { JwtMiddleware } from '../middleware/jwt.middleware';
 @ApiTags('用户')
 @Controller('/')
 export class APIController {
@@ -37,7 +38,7 @@ export class APIController {
     }
 
     @ApiOperation({ summary: '用户创建' })
-    @Post('/addUser')
+    @Post('/addUser', { middleware: [JwtMiddleware] })
     @ApiBody({
         type: CerateUserParam,
     })

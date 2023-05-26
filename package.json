@@ -14,6 +14,7 @@
     "@midwayjs/koa": "^3.0.0",
     "@midwayjs/logger": "^2.14.0",
     "@midwayjs/oss": "^3.11.6",
+    "@midwayjs/passport": "3",
     "@midwayjs/swagger": "3",
     "@midwayjs/typeorm": "3",
     "@midwayjs/upload": "3",
@@ -21,6 +22,7 @@
     "koa-body": "^6.0.1",
     "mysql": "^2.18.1",
     "mysql2": "^3.3.1",
+    "passport-jwt": "^4.0.1",
     "sequelize-auto-midway": "^0.0.10",
     "swagger-ui-dist": "^4.18.3",
     "typeorm": "^0.3.16"
