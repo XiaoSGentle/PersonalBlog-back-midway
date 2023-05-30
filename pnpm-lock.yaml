@@ -2,6 +2,8 @@ lockfileVersion: 5.4
 
 specifiers:
   '@midwayjs/bootstrap': ^3.0.0
+  '@midwayjs/casbin': '3'
+  '@midwayjs/casbin-typeorm-adapter': ^3.11.8
   '@midwayjs/cli': ^2.0.0
   '@midwayjs/core': ^3.0.0
   '@midwayjs/cos': ^3.11.6
@@ -36,6 +38,8 @@ specifiers:
 
 dependencies:
   '@midwayjs/bootstrap': registry.npmmirror.com/@midwayjs/bootstrap/3.11.6
+  '@midwayjs/casbin': registry.npmmirror.com/@midwayjs/casbin/3.11.6
+  '@midwayjs/casbin-typeorm-adapter': registry.npmmirror.com/@midwayjs/casbin-typeorm-adapter/3.11.8
   '@midwayjs/core': registry.npmmirror.com/@midwayjs/core/3.11.6
   '@midwayjs/cos': registry.npmmirror.com/@midwayjs/cos/3.11.6
   '@midwayjs/cross-domain': registry.npmmirror.com/@midwayjs/cross-domain/3.11.6
@@ -968,6 +972,25 @@ packages:
     dependencies:
       '@midwayjs/async-hooks-context-manager': registry.npmmirror.com/@midwayjs/async-hooks-context-manager/3.11.6
       '@midwayjs/event-bus': registry.npmmirror.com/@midwayjs/event-bus/1.7.0
+    dev: false
+
+  registry.npmmirror.com/@midwayjs/casbin-typeorm-adapter/3.11.8:
+    resolution: {integrity: sha512-Z1wrpHhhW8j2GvFyde3EhooD+I1cQmr+rH1nCpws6597KNgsPM3E3sWQ1b+7V9VcsTjMbj7MecdundfvvxVThg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@midwayjs/casbin-typeorm-adapter/-/casbin-typeorm-adapter-3.11.8.tgz}
+    name: '@midwayjs/casbin-typeorm-adapter'
+    version: 3.11.8
+    engines: {node: '>=12'}
+    dependencies:
+      '@midwayjs/casbin': registry.npmmirror.com/@midwayjs/casbin/3.11.6
+      '@midwayjs/typeorm': registry.npmmirror.com/@midwayjs/typeorm/3.11.8
+    dev: false
+
+  registry.npmmirror.com/@midwayjs/casbin/3.11.6:
+    resolution: {integrity: sha512-BfmZ/icegsbQmUoPdo7+1KaQgBrr7cH/YyIrunDiLL44YwqOTXNZhgsAJTlRUatkJh9DJ0QWWVX+gsp04fzZOA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@midwayjs/casbin/-/casbin-3.11.6.tgz}
+    name: '@midwayjs/casbin'
+    version: 3.11.6
+    engines: {node: '>=12'}
+    dependencies:
+      casbin: registry.npmmirror.com/casbin/5.26.1
     dev: false
 
   registry.npmmirror.com/@midwayjs/cli-plugin-build/2.0.14:
@@ -2325,6 +2348,12 @@ packages:
     engines: {node: '>=10.12.0'}
     dev: false
 
+  registry.npmmirror.com/await-lock/2.2.2:
+    resolution: {integrity: sha512-aDczADvlvTGajTDjcjpJMqRkOF6Qdz3YbPZm/PyW6tKPkx2hlYBzxMhEywM/tU72HrVZjgl5VCdRuMlA7pZ8Gw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/await-lock/-/await-lock-2.2.2.tgz}
+    name: await-lock
+    version: 2.2.2
+    dev: false
+
   registry.npmmirror.com/aws-sign2/0.7.0:
     resolution: {integrity: sha512-08kcGqnYf/YmjoRhfxyu+CLxBjUtHLXLXX/vUfx9l2LYzG3c1m61nrpyFUZI6zeS+Li/wWMMidD9KgrqtGq3mA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/aws-sign2/-/aws-sign2-0.7.0.tgz}
     name: aws-sign2
@@ -2632,6 +2661,18 @@ packages:
     name: caniuse-lite
     version: 1.0.30001488
     dev: true
+
+  registry.npmmirror.com/casbin/5.26.1:
+    resolution: {integrity: sha512-CbJd6FBsu1drihQhhFhYREaTdPYn77B1uv2U3f35Oo7VQIixqkilqdKZgBTKGNldQ09xH2cqFhpgkxZHO+ioVQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/casbin/-/casbin-5.26.1.tgz}
+    name: casbin
+    version: 5.26.1
+    dependencies:
+      await-lock: registry.npmmirror.com/await-lock/2.2.2
+      buffer: registry.npmmirror.com/buffer/6.0.3
+      csv-parse: registry.npmmirror.com/csv-parse/5.4.0
+      expression-eval: registry.npmmirror.com/expression-eval/5.0.0
+      minimatch: registry.npmmirror.com/minimatch/7.4.6
+    dev: false
 
   registry.npmmirror.com/caseless/0.12.0:
     resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/caseless/-/caseless-0.12.0.tgz}
@@ -3023,6 +3064,12 @@ packages:
     version: 2.0.0
     engines: {node: '>=8'}
     dev: true
+
+  registry.npmmirror.com/csv-parse/5.4.0:
+    resolution: {integrity: sha512-JiQosUWiOFgp4hQn0an+SBoV9IKdqzhROM0iiN4LB7UpfJBlsSJlWl9nq4zGgxgMAzHJ6V4t29VAVD+3+2NJAg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csv-parse/-/csv-parse-5.4.0.tgz}
+    name: csv-parse
+    version: 5.4.0
+    dev: false
 
   registry.npmmirror.com/dashdash/1.14.1:
     resolution: {integrity: sha512-jRFi8UDGo6j+odZiEpjazZaWqEal3w/basFjQHQEwVtZJGDpxbH1MeYluwCS8Xq5wmLJooDlMgvVarmWfGM44g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/dashdash/-/dashdash-1.14.1.tgz}
@@ -3718,6 +3765,14 @@ packages:
       jest-message-util: registry.npmmirror.com/jest-message-util/29.5.0
       jest-util: registry.npmmirror.com/jest-util/29.5.0
     dev: true
+
+  registry.npmmirror.com/expression-eval/5.0.0:
+    resolution: {integrity: sha512-2H7OBTa/UKBgTVRRb3/lXd+D89cLjClNtldnzOpZYWZK1zBLIlrz8BLWp5f81AAYOc37GbhkCRXtl5Z/q4D91g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/expression-eval/-/expression-eval-5.0.0.tgz}
+    name: expression-eval
+    version: 5.0.0
+    dependencies:
+      jsep: registry.npmmirror.com/jsep/0.3.5
+    dev: false
 
   registry.npmmirror.com/extend-shallow/2.0.1:
     resolution: {integrity: sha512-zCnTtlxNoAiDc3gqY2aYAWFx7XWWiasuF2K8Me5WbN8otHKTUKBwjPtNpRs/rbUZm7KxWAaNj7P1a/p52GbVug==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/extend-shallow/-/extend-shallow-2.0.1.tgz}
@@ -5366,6 +5421,13 @@ packages:
     version: 0.1.1
     dev: false
 
+  registry.npmmirror.com/jsep/0.3.5:
+    resolution: {integrity: sha512-AoRLBDc6JNnKjNcmonituEABS5bcfqDhQAWWXNTFrqu6nVXBpBAGfcoTGZMFlIrh9FjmE1CQyX9CTNwZrXMMDA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jsep/-/jsep-0.3.5.tgz}
+    name: jsep
+    version: 0.3.5
+    engines: {node: '>= 6.0.0'}
+    dev: false
+
   registry.npmmirror.com/jsesc/2.5.2:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/jsesc/-/jsesc-2.5.2.tgz}
     name: jsesc
@@ -5976,6 +6038,15 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       brace-expansion: registry.npmmirror.com/brace-expansion/2.0.1
+
+  registry.npmmirror.com/minimatch/7.4.6:
+    resolution: {integrity: sha512-sBz8G/YjVniEz6lKPNpKxXwazJe4c19fEfV2GDMX6AjFz+MX9uDWIZW8XreVhkFW3fkIdTv/gxWr/Kks5FFAVw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/minimatch/-/minimatch-7.4.6.tgz}
+    name: minimatch
+    version: 7.4.6
+    engines: {node: '>=10'}
+    dependencies:
+      brace-expansion: registry.npmmirror.com/brace-expansion/2.0.1
+    dev: false
 
   registry.npmmirror.com/minimist-options/4.1.0:
     resolution: {integrity: sha512-Q4r8ghd80yhO/0j1O3B2BjweX3fiHg9cdOwjJd2J76Q135c+NDxGCqdYKQ1SKBuFfgWbAUzBfvYjPUEeNgqN1A==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/minimist-options/-/minimist-options-4.1.0.tgz}

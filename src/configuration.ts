@@ -15,8 +15,9 @@ import * as swagger from '@midwayjs/swagger';
 import * as orm from '@midwayjs/typeorm';
 import * as upload from '@midwayjs/upload';
 import * as validate from '@midwayjs/validate';
+import * as casbin from '@midwayjs/casbin';
 import { join } from 'path';
-import { AUTH_KEY } from './decorator/auth.decorator';
+import { AUTH_KEY } from './dto/decorator/auth.decorator';
 import { DefaultErrorFilter } from './filter/default.filter';
 import { UnauthorizedFilter } from './filter/identity.filter';
 import { NotFoundFilter } from './filter/notfound.filter';
@@ -31,6 +32,7 @@ import { JwtMiddleware } from './middleware/jwt.middleware';
         swagger,
         validate,
         cos,
+        casbin,
         jwt,
         passport,
         upload,

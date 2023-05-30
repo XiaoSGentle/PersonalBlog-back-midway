@@ -1,5 +1,6 @@
 import { MidwayConfig } from '@midwayjs/core';
 import { join } from 'path';
+import { CasbinRule, createAdapter } from '@midwayjs/casbin-typeorm-adapter';
 
 export default {
     // use for cookie sign key, should change to your own and keep security
@@ -32,7 +33,27 @@ export default {
                 charset: 'utf8mb4', // 设置字符集为UTF-8
                 collation: 'utf8mb4_unicode_ci', // 设置排序规则为UTF-8
             },
+            'node-casbin-official': {
+                type: 'mysql',
+                host: '1.15.141.230',
+                port: 3306,
+                username: 'root',
+                password: 'chaoyang583355',
+                database: 'personal_blog',
+                synchronize: true, // 如果第一次使用，不存在表，有同步的需求可以写 true，注意会丢数据
+                logging: false,
+                entities: [CasbinRule],
+                charset: 'utf8mb4', // 设置字符集为UTF-8
+                collation: 'utf8mb4_unicode_ci', // 设置排序规则为UTF-8
+            },
         },
+    },
+    //casbin 策略配置
+    casbin: {
+        policyAdapter: createAdapter({
+            // 配置了上面的连接名
+            dataSourceName: 'node-casbin-official',
+        }),
     },
     // jwt配置
     jwt: {

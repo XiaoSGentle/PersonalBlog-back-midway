@@ -10,7 +10,6 @@ import { AddOrUpdateNoteParam } from '../dto/note/AddOrUpdateNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
 import { NoteService } from '../service/note.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
-import { Pageparam } from '../util/Page/PageParam';
 
 @ApiBasicAuth()
 @ApiTags('笔记')
@@ -22,15 +21,6 @@ export class NoteController {
     @Inject()
     noteService: NoteService;
 
-    @ApiOperation({ summary: '按照条件获取笔记' })
-    @Post('/getNotes')
-    @ApiBody({
-        type: GetNoteParam,
-    })
-    async getNotes(@Body() param: GetNoteParam) {
-        return ApiResult.ok(await this.noteService.getNoteList(param));
-    }
-
     @ApiOperation({ summary: '根据UUID获取笔记详情' })
     @Get('/getNotesByUuid')
     async getNotesByUuid(@Query('uuid') uuid: string) {
@@ -38,8 +28,8 @@ export class NoteController {
             where: { uuid: uuid },
         });
         // 添加阅读次数
-        re.readNum = re.readNum++;
-        this.noteService.noteModel.save(re);
+        re.readNum = re.readNum + 1;
+        await this.noteService.noteModel.save(re);
         return ApiResult.ok(re);
     }
 
@@ -74,10 +64,10 @@ export class NoteController {
     @ApiOperation({ summary: '获取笔记' })
     @Post('/getAllNote')
     @ApiBody({
-        type: Pageparam,
+        type: GetNoteParam,
     })
-    async getAllMessage(@Body() pageParam: Pageparam) {
-        return ApiResult.ok(await this.noteService.getAllNote(pageParam));
+    async getAllMessage(@Body() param: GetNoteParam) {
+        return ApiResult.ok(await this.noteService.getAllNote(param));
     }
     /**
      * 获取所有笔记分类标签

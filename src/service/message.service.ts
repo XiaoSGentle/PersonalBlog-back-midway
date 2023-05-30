@@ -2,14 +2,13 @@ import { Inject, Provide } from '@midwayjs/core';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 // import { Repository } from 'typeorm';
+import { Context } from '@midwayjs/koa';
 import { addMessageParam } from '../dto/message/addMessageParam';
 import { FunMessage } from '../entity/FunMessage';
 import { Pageparam } from '../util/Page/PageParam';
 import { Pagination } from '../util/Page/Pagination';
-import { getUUID } from '../util/UUID/UUID';
 import { ReqUtil } from '../util/ReqUtil/ReqUtil';
-import { Context } from '@midwayjs/koa';
-import { log } from 'console';
+import { getUUID } from '../util/UUID/UUID';
 @Provide()
 export class MessageService {
     @Inject()
@@ -20,7 +19,7 @@ export class MessageService {
     // 根据分页参数获取留言
     async getAllMessage(pageParam: Pageparam) {
         const query: SelectQueryBuilder<FunMessage> = this.messageModel
-            .createQueryBuilder('message')
+            .createQueryBuilder()
             .orderBy('create_time', 'ASC');
         const result = Pagination.findByPage(query, pageParam);
         return result;
@@ -40,7 +39,6 @@ export class MessageService {
         addParam.updateTime = new Date();
         addParam.system = ReqUtil.getOS(this.ctx);
         const result: Promise<FunMessage> = this.messageModel.save(addParam);
-        log(result);
         return result;
     }
 }

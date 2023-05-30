@@ -1,6 +1,6 @@
+import { ApiProperty } from '@midwayjs/swagger';
 import { getManager, SelectQueryBuilder } from 'typeorm';
 import { Pageparam } from './PageParam';
-import { ApiProperty } from '@midwayjs/swagger';
 // TODO:仔细看看
 // 复制于 https://blog.csdn.net/Sam_C/article/details/114825951?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-114825951-blog-129285697.235%5Ev36%5Epc_relevant_default_base3&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-114825951-blog-129285697.235%5Ev36%5Epc_relevant_default_base3&utm_relevant_index=1
 /*
@@ -110,10 +110,6 @@ export class Pagination {
             Number((pagination._pageNum - 1) * pagination._pageSize)
         );
         pagination.data = await queryBuilder.getMany();
-
-        // pagination.data = pageHelper.getRayMany
-        //     ? await queryBuilder.getRawMany()
-        //     : await queryBuilder.getMany();
         return pagination;
     }
 
