@@ -42,7 +42,7 @@ export class NoteService {
         });
         Object.assign(note, reInSql);
         Object.assign(note, param);
-        note.tags = param.title.toString();
+        note.tags = param.tags.toString();
         note.updateTime = new Date();
         return await this.noteModel.save([note], { reload: false });
     }
