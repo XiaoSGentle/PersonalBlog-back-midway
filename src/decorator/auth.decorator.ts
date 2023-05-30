@@ -5,6 +5,6 @@ import { createCustomMethodDecorator } from '@midwayjs/core';
 export const AUTH_KEY = 'decorator:auth_11adwo131232sd21';
 
 export function NoAuth(): MethodDecorator {
-    // 我们传递了一个可以修改展示格式的参数
-    return createCustomMethodDecorator(AUTH_KEY, null);
+  // 我们传递了一个可以修改展示格式的参数
+  return createCustomMethodDecorator(AUTH_KEY, null);
 }
