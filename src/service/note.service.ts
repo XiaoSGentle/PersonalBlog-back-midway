@@ -44,13 +44,13 @@ export class NoteService {
         Object.assign(note, param);
         note.tags = param.title.toString();
         note.updateTime = new Date();
-        return await this.noteModel.save([note], { reload: false });
+        return await this.noteModel.save([note]);
     }
     // 获取笔记
     async getAllNote(param: Pageparam) {
         const query: SelectQueryBuilder<FunNote> = this.noteModel
             .createQueryBuilder('note')
-            .orderBy('create_time', 'ASC');
+            .orderBy('create_time', 'DESC');
         const result = Pagination.findByPage(query, param);
         return result;
     }

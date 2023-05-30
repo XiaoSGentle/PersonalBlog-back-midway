@@ -21,10 +21,10 @@ export default {
         dataSource: {
             default: {
                 type: 'mysql',
-                host: '127.0.0.1',
+                host: '1.15.141.230',
                 port: 3306,
                 username: 'root',
-                password: 'root',
+                password: 'chaoyang583355',
                 database: 'personal_blog',
                 synchronize: false, // 如果第一次使用，不存在表，有同步的需求可以写 true，注意会丢数据
                 logging: false,

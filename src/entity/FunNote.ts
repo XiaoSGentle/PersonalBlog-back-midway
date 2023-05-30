@@ -1,5 +1,11 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { BaseEntity } from '../util/BaseEntity/BaseEntity';
+import {
+    BaseEntity,
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryColumn,
+    UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('fun_note', { schema: 'personal_blog' })
 export class FunNote extends BaseEntity {
@@ -57,4 +63,24 @@ export class FunNote extends BaseEntity {
 
     @Column('int', { name: 'del', nullable: true, comment: '逻辑删除' })
     del: number | null;
+
+    @CreateDateColumn({
+        type: 'timestamp',
+    })
+    @Column('datetime', {
+        name: 'create_time',
+        nullable: true,
+        comment: '创建时间',
+    })
+    createTime: Date | null;
+
+    @UpdateDateColumn({
+        type: 'timestamp',
+    })
+    @Column('datetime', {
+        name: 'update_time',
+        nullable: true,
+        comment: '最后更新时间',
+    })
+    updateTime: Date | null;
 }
