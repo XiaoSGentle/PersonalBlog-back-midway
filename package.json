@@ -5,6 +5,8 @@
   "private": true,
   "dependencies": {
     "@midwayjs/bootstrap": "^3.0.0",
+    "@midwayjs/casbin": "3",
+    "@midwayjs/casbin-typeorm-adapter": "^3.11.8",
     "@midwayjs/core": "^3.0.0",
     "@midwayjs/cos": "^3.11.6",
     "@midwayjs/cross-domain": "^3.11.6",

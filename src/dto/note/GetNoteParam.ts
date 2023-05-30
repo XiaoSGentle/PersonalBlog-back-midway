@@ -3,19 +3,26 @@ import { Rule, RuleType } from '@midwayjs/validate';
 import { Pageparam } from '../../util/Page/PageParam';
 
 export class GetNoteParam extends Pageparam {
-    @Rule(RuleType.string().min(6).max(16))
+    @Rule(RuleType.string().empty(''))
     @ApiProperty({ description: '关键字搜索', example: 'java' })
     keyword: string;
 
-    @Rule(RuleType.string().min(2).max(9))
-    @ApiProperty({ description: '收藏者的uuid', example: '113129378912' })
+    @Rule(RuleType.array().empty(''))
+    @ApiProperty({
+        description: '分类uuid',
+        example: ['16843920727193'],
+    })
+    classfiyUuids: Array<string>;
+
+    @Rule(RuleType.string().empty(''))
+    @ApiProperty({ description: '收藏者的uuid', example: '10203281021' })
     collectorUuid: string;
 
-    @Rule(RuleType.string().max(20).max(20))
-    @ApiProperty({ description: '创建者uuid', example: '113129378912' })
+    @Rule(RuleType.string().empty(''))
+    @ApiProperty({ description: '创建者uuid', example: '10203281021' })
     createUUid: string;
 
-    @Rule(RuleType.string().min(3).max(3))
-    @ApiProperty({ description: '创建时间', example: '3123123131' })
+    @Rule(RuleType.string().empty(''))
+    @ApiProperty({ description: '创建时间', example: '' })
     createTime: string;
 }
