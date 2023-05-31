@@ -1,9 +1,9 @@
+import * as casbin from '@midwayjs/casbin';
 import {
     App,
     Configuration,
     Inject,
-    JoinPoint,
-    MidwayDecoratorService,
+    MidwayDecoratorService
 } from '@midwayjs/core';
 import * as cos from '@midwayjs/cos';
 import * as crossDomain from '@midwayjs/cross-domain';
@@ -13,17 +13,16 @@ import * as koa from '@midwayjs/koa';
 import * as passport from '@midwayjs/passport';
 import * as swagger from '@midwayjs/swagger';
 import * as typeorm from '@midwayjs/typeorm';
-import * as casbin from '@midwayjs/casbin';
 import * as upload from '@midwayjs/upload';
 import * as validate from '@midwayjs/validate';
 import { join } from 'path';
-import { AUTH_KEY } from './decorator/auth.decorator';
 import { DefaultErrorFilter } from './filter/default.filter';
 import { UnauthorizedFilter } from './filter/identity.filter';
 import { NotFoundFilter } from './filter/notfound.filter';
 import { ValidateErrorFilter } from './filter/validate.filter';
-import { ReportMiddleware } from './middleware/report.middleware';
+import { UserGuard } from './guard/UserGuard';
 import { JwtMiddleware } from './middleware/jwt.middleware';
+import { ReportMiddleware } from './middleware/report.middleware';
 
 @Configuration({
     imports: [
@@ -61,13 +60,7 @@ export class ContainerLifeCycle {
             DefaultErrorFilter,
             UnauthorizedFilter,
         ]);
-        // 实现注解
-        this.decoratorService.registerMethodHandler(AUTH_KEY, param => {
-            return {
-                before: async (joinPoint: JoinPoint) => {
-                    // 1
-                },
-            };
-        });
+        // 使用管道
+        this.app.useGuard(UserGuard);
     }
 }

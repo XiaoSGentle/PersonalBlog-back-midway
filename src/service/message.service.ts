@@ -1,13 +1,13 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
-// import { Repository } from 'typeorm';
 import { Context } from '@midwayjs/koa';
 import { addMessageParam } from '../dto/message/addMessageParam';
 import { FunMessage } from '../entity/FunMessage';
 import { Pageparam } from '../util/Page/PageParam';
 import { Pagination } from '../util/Page/Pagination';
 import { ReqUtil } from '../util/ReqUtil/ReqUtil';
+import { TimeUtil } from '../util/Time/TimeUtil';
 import { getUUID } from '../util/UUID/UUID';
 @Provide()
 export class MessageService {
@@ -34,9 +34,9 @@ export class MessageService {
         addParam.content = addMessageParam.content;
         addParam.name = addMessageParam.name;
         addParam.isVisitor = addMessageParam.isVisitor;
-        addParam.createTime = new Date();
+        addParam.createTime = TimeUtil.GetNowTime();
         addParam.del = 0;
-        addParam.updateTime = new Date();
+        addParam.updateTime = TimeUtil.GetNowTime();
         addParam.system = ReqUtil.getOS(this.ctx);
         const result: Promise<FunMessage> = this.messageModel.save(addParam);
         return result;

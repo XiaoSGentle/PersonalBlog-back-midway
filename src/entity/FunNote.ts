@@ -72,7 +72,7 @@ export class FunNote extends BaseEntity {
         nullable: true,
         comment: '创建时间',
     })
-    createTime: Date | null;
+    createTime: string | null;
 
     @UpdateDateColumn({
         type: 'timestamp',
@@ -82,5 +82,5 @@ export class FunNote extends BaseEntity {
         nullable: true,
         comment: '最后更新时间',
     })
-    updateTime: Date | null;
+    updateTime: string | null;
 }

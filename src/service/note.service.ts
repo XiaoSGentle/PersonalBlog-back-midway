@@ -8,6 +8,7 @@ import { FunNote } from '../entity/FunNote';
 import { RelNoteClassify } from '../entity/RelNoteClassify';
 import { Pagination } from '../util/Page/Pagination';
 import { StringUtils } from '../util/String/StringUtil';
+import { TimeUtil } from '../util/Time/TimeUtil';
 import { getUUID } from '../util/UUID/UUID';
 
 @Provide()
@@ -31,7 +32,7 @@ export class NoteService {
         Object.assign(note, reInSql);
         Object.assign(note, param);
         note.tags = param.tags.toString();
-        note.updateTime = new Date();
+        note.updateTime = TimeUtil.GetNowTime();
         return await this.noteModel.save([note]);
     }
     // 获取笔记
@@ -67,8 +68,8 @@ function createNewNote(creatorUuid: string) {
     const note = new FunNote();
     note.creatorUuid = creatorUuid;
     note.del = 0;
-    note.createTime = new Date();
-    note.updateTime = new Date();
+    note.createTime = TimeUtil.GetNowTime();
+    note.updateTime = TimeUtil.GetNowTime();
     note.readNum = 0;
     note.starNum = 0;
     note.uuid = getUUID();

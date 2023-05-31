@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { SysLog } from '../entity/SysLog';
 import { ReqUtil } from '../util/ReqUtil/ReqUtil';
 import { getUUID } from '../util/UUID/UUID';
+import { TimeUtil } from '../util/Time/TimeUtil';
 
 @Middleware()
 export class ReportMiddleware implements IMiddleware<Context, NextFunction> {
@@ -28,7 +29,7 @@ export class ReportMiddleware implements IMiddleware<Context, NextFunction> {
             logIn.browser = ReqUtil.getBrowser(ctx);
             logIn.system = ReqUtil.getOS(ctx);
             logIn.uuid = getUUID();
-            logIn.creatTime = new Date();
+            logIn.creatTime = TimeUtil.GetNowTime();
             this.sysLog.save(logIn);
             // 返回给上一个中间件的结果
             return result;

@@ -7,7 +7,7 @@ export class DefaultErrorFilter {
         // 所有的未分类错误会到这里
         return {
             success: false,
-            message: err.message,
+            message: err
         };
     }
 }

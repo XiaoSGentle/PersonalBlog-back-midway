@@ -1,17 +1,17 @@
-import { Body, Controller, Get, Inject, Post, Query } from '@midwayjs/core';
+import { Body, Controller, Get, Inject, Param, Post, Put, Query } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import {
-    ApiBasicAuth,
+    ApiBearerAuth,
     ApiBody,
     ApiOperation,
-    ApiTags,
+    ApiTags
 } from '@midwayjs/swagger';
 import { AddOrUpdateNoteParam } from '../dto/note/AddOrUpdateNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
 import { NoteService } from '../service/note.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 
-@ApiBasicAuth()
+@ApiBearerAuth()
 @ApiTags('笔记')
 @Controller('/note')
 export class NoteController {
@@ -21,9 +21,14 @@ export class NoteController {
     @Inject()
     noteService: NoteService;
 
-    @ApiOperation({ summary: '根据UUID获取笔记详情' })
-    @Get('/getNotesByUuid')
-    async getNotesByUuid(@Query('uuid') uuid: string) {
+    /**
+     * 获取笔记详情
+     * @param uuid 笔记uuid
+     * @returns 
+     */
+    @ApiOperation({ summary: '获取笔记详情' })
+    @Get('/:uuid')
+    async getNotesByUuid(@Param('uuid') uuid: string) {
         const re = await this.noteService.noteModel.findOne({
             where: { uuid: uuid },
         });
@@ -39,7 +44,7 @@ export class NoteController {
      * @returns ApiResult
      */
     @ApiOperation({ summary: '新增笔记' })
-    @Get('/addNote')
+    @Post('/')
     async addNote(@Query('createUuid') createUuid: string) {
         return ApiResult.ok(await this.noteService.addNote(createUuid));
     }
@@ -49,7 +54,7 @@ export class NoteController {
      * @returns ApiResult
      */
     @ApiOperation({ summary: '更新笔记' })
-    @Post('/updateNote')
+    @Put('/')
     @ApiBody({
         type: AddOrUpdateNoteParam,
     })
@@ -61,12 +66,12 @@ export class NoteController {
      * @param pageParam 分页参数
      * @returns 结果
      */
-    @ApiOperation({ summary: '获取笔记' })
-    @Post('/getAllNote')
+    @ApiOperation({ summary: '获取笔记列表' })
+    @Get('/all')
     @ApiBody({
         type: GetNoteParam,
     })
-    async getAllMessage(@Body() param: GetNoteParam) {
+    async getAllMessage(@Query() param: GetNoteParam) {
         return ApiResult.ok(await this.noteService.getAllNote(param));
     }
     /**
@@ -74,7 +79,7 @@ export class NoteController {
      * @returns 结果
      */
     @ApiOperation({ summary: '获取笔记分类标签' })
-    @Get('/getAllNoteClassify')
+    @Get('/classify')
     async getAllNoteClassify() {
         return ApiResult.ok(await this.noteService.getAllNoteClassify());
     }

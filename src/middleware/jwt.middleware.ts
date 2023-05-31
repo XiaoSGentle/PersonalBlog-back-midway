@@ -3,7 +3,6 @@
 import { Inject, Middleware, httpError } from '@midwayjs/core';
 import { Context, NextFunction } from '@midwayjs/koa';
 import { AuthenticateOptions, PassportMiddleware } from '@midwayjs/passport';
-import { log } from 'console';
 import { JwtStrategy } from '../strategy/jwt.strategy';
 import { JwtUtil } from '../util/Jwt/Jwt';
 
@@ -37,21 +36,15 @@ export class JwtMiddleware extends PassportMiddleware(JwtStrategy) {
             const [scheme, token] = parts;
 
             if (/^Bearer$/i.test(scheme)) {
-                try {
-                    //jwt.verify方法验证token是否有效
-                    this.jwtUtil.jwtVerify(token);
-                } catch (error: any) {
-                    log(error);
-                    // 抛异常
-                    throw new httpError.UnauthorizedError();
-                }
+                await this.jwtUtil.jwtVerify(token);
+                // TODO: 将用户信息存入ctx
                 await next();
             }
         };
     }
-    //配置忽略鉴权的路由地址
+    // 配置忽略鉴权的路由地址
     public match(ctx: Context): boolean {
-        const ignore = ctx.path.indexOf('/api') !== -1;
+        const ignore = ctx.path.indexOf('/api/Login') !== -1;
         return !ignore;
     }
 }

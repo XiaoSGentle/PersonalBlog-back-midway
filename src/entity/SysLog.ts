@@ -29,7 +29,7 @@ export class SysLog {
 
     @CreateDateColumn({})
     @Column({ name: 'create_time' })
-    creatTime: Date | null;
+    creatTime: string | null;
 
     @Column('varchar', {
         name: 'system',
