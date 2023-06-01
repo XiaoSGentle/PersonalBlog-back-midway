@@ -1,6 +1,20 @@
-import { Body, Controller, Del, Get, Inject, Param, Post, Query } from '@midwayjs/core';
+import {
+    Body,
+    Controller,
+    Del,
+    Get,
+    Inject,
+    Param,
+    Post,
+    Query,
+} from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiTags } from '@midwayjs/swagger';
+import {
+    ApiBearerAuth,
+    ApiBody,
+    ApiOperation,
+    ApiTags,
+} from '@midwayjs/swagger';
 import { addMessageParam } from '../dto/message/addMessageParam';
 import { MessageService } from '../service/message.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
@@ -51,7 +65,9 @@ export class MessageController {
     @ApiOperation({ summary: '删除留言' })
     @Del('/:uuid')
     async delMessage(@Param('uuid') param: string) {
-        return ApiResult.ok(await this.messageService.messageModel.softDelete([param]))
+        return ApiResult.ok(
+            await this.messageService.messageModel.softDelete([param])
+        );
     }
     /**
      * 删除留言
@@ -61,7 +77,6 @@ export class MessageController {
     @ApiOperation({ summary: '获取留言详情' })
     @Get('/:uuid')
     async getAllMessage(@Param('uuid') param: string) {
-        return ApiResult.ok()
+        return ApiResult.ok();
     }
-
 }

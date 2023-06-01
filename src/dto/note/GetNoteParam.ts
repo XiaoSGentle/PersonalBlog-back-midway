@@ -7,12 +7,12 @@ export class GetNoteParam extends Pageparam {
     @ApiProperty({ description: '关键字搜索', example: 'java' })
     keyword: string;
 
-    @Rule(RuleType.array().empty(''))
+    @Rule(RuleType.string().empty(''))
     @ApiProperty({
         description: '分类uuid',
         example: ['16843920727193'],
     })
-    classfiyUuids: Array<string>;
+    classfiyUuids: string[];
 
     @Rule(RuleType.string().empty(''))
     @ApiProperty({ description: '收藏者的uuid', example: '10203281021' })

@@ -3,6 +3,7 @@
 import { Inject, Middleware, httpError } from '@midwayjs/core';
 import { Context, NextFunction } from '@midwayjs/koa';
 import { AuthenticateOptions, PassportMiddleware } from '@midwayjs/passport';
+import { UserService } from '../service/user.service';
 import { JwtStrategy } from '../strategy/jwt.strategy';
 import { JwtUtil } from '../util/Jwt/Jwt';
 
@@ -10,6 +11,9 @@ import { JwtUtil } from '../util/Jwt/Jwt';
 export class JwtMiddleware extends PassportMiddleware(JwtStrategy) {
     @Inject()
     jwtUtil: JwtUtil;
+
+    @Inject()
+    userService: UserService;
 
     public static getName(): string {
         return 'jwt';
@@ -36,8 +40,13 @@ export class JwtMiddleware extends PassportMiddleware(JwtStrategy) {
             const [scheme, token] = parts;
 
             if (/^Bearer$/i.test(scheme)) {
-                await this.jwtUtil.jwtVerify(token);
-                // TODO: 将用户信息存入ctx
+                const JWTInfo = await this.jwtUtil.jwtVerify(token);
+                const userInfoInSql = await this.userService.userModel.findOne({
+                    where: {
+                        uuid: JWTInfo.uuid,
+                    },
+                });
+                ctx.user = userInfoInSql;
                 await next();
             }
         };

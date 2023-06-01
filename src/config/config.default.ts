@@ -35,7 +35,7 @@ export default (appInfo: MidwayAppInfo) => {
                     collation: 'utf8mb4_unicode_ci', // 设置排序规则为UTF-8
                     dateStrings: true,
                 },
-                nodeCasbinOfficial: {   
+                nodeCasbinOfficial: {
                     type: 'mysql',
                     host: '1.15.141.230',
                     port: 3306,
@@ -57,7 +57,7 @@ export default (appInfo: MidwayAppInfo) => {
         // jwt配置
         jwt: {
             secret: 'reacool2023',
-            expiresIn: '168h',
+            expiresIn: '24h',
         },
         // swagger配置
         swagger: {

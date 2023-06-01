@@ -15,7 +15,7 @@ export class JwtUtil {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     jwtSign(sign: any): any {
         return this.jwtService.sign(sign, this.jwt.secret, {
-            expiresIn: 1000 * 24,
+            expiresIn: this.jwt.expiresIn,
         });
     }
     /**

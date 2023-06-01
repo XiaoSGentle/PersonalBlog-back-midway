@@ -3,13 +3,18 @@ import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
 import { Context } from '@midwayjs/koa';
 import { ApiCode, ApiMsg } from '../util/ApiResult/ApiCode';
 import { ApiResult } from '../util/ApiResult/ApiResult';
+import { TokenExpiredError } from 'jsonwebtoken';
 
 @Catch(UnauthorizedError)
 export class UnauthorizedFilter {
     async catch(err: Error, ctx: Context) {
-        ctx.response.body = ApiResult.fail(
-            ApiCode.UNAUTHORIZED,
-            ApiMsg.UNAUTHORIZED
-        );
+        return ApiResult.fail(ApiCode.UNAUTHORIZED, ApiMsg.UNAUTHORIZED);
+    }
+}
+
+@Catch(TokenExpiredError)
+export class TokenExpiredFilter {
+    async catch(err: Error, ctx: Context) {
+        return ApiResult.fail(ApiCode.TOKEN_EXPIRED, ApiMsg.TOKEN_EXPIRED);
     }
 }

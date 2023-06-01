@@ -28,7 +28,7 @@ export class APIController {
     @ApiBody({
         type: LoginParam,
     })
-    async getUser(@Body() user: LoginParam): Promise<ApiResult> {
+    async Login(@Body() user: LoginParam): Promise<ApiResult> {
         const result = await this.userService.Login(user);
         result.password = '';
         return ApiResult.ok({
@@ -54,7 +54,7 @@ export class APIController {
         // jwt 测试
         // const re = await this.jwtUtil.jwtSign({ uuid: '10000' });
         // log(await this.jwtUtil.jwtVerify(re));
-        // return { 
+        // return {
         //     验证结果: this.jwtUtil.jwtVerify(re),
         //     解析结果: this.jwtUtil.jwtDecode(re),
         // };

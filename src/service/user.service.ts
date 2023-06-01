@@ -1,4 +1,4 @@
-import { Inject, Provide } from '@midwayjs/core';
+import { Inject, Provide, Scope, ScopeEnum } from '@midwayjs/core';
 import { JwtService } from '@midwayjs/jwt';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
@@ -6,6 +6,7 @@ import { CerateUserParam } from '../dto/user/CreateUserParam';
 import { LoginParam } from '../dto/user/LoginParam';
 import { SysUser } from '../entity/SysUser';
 @Provide()
+@Scope(ScopeEnum.Request, { allowDowngrade: true })
 export class UserService {
     @InjectEntityModel(SysUser)
     userModel: Repository<SysUser>;
@@ -25,7 +26,6 @@ export class UserService {
         return result;
     }
     async createUser(createUserparam: CerateUserParam) {
-        // const user: SysUser = { ...createUserparam };
         return createUserparam;
     }
 }

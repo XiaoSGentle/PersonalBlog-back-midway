@@ -21,6 +21,7 @@
     "@midwayjs/typeorm": "^3.11.9",
     "@midwayjs/upload": "^3.11.9",
     "@midwayjs/validate": "^3.11.9",
+    "jsonwebtoken": "^9.0.0",
     "koa-body": "^6.0.1",
     "mysql": "^2.18.1",
     "passport-jwt": "^4.0.1",

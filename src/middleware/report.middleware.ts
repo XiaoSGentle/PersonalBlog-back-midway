@@ -4,8 +4,8 @@ import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
 import { SysLog } from '../entity/SysLog';
 import { ReqUtil } from '../util/ReqUtil/ReqUtil';
-import { getUUID } from '../util/UUID/UUID';
 import { TimeUtil } from '../util/Time/TimeUtil';
+import { getUUID } from '../util/UUID/UUID';
 
 @Middleware()
 export class ReportMiddleware implements IMiddleware<Context, NextFunction> {

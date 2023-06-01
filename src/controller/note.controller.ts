@@ -1,10 +1,19 @@
-import { Body, Controller, Get, Inject, Param, Post, Put, Query } from '@midwayjs/core';
+import {
+    Body,
+    Controller,
+    Get,
+    Inject,
+    Param,
+    Post,
+    Put,
+    Query,
+} from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import {
     ApiBearerAuth,
     ApiBody,
     ApiOperation,
-    ApiTags
+    ApiTags,
 } from '@midwayjs/swagger';
 import { AddOrUpdateNoteParam } from '../dto/note/AddOrUpdateNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
@@ -24,7 +33,7 @@ export class NoteController {
     /**
      * 获取笔记详情
      * @param uuid 笔记uuid
-     * @returns 
+     * @returns ApiResult
      */
     @ApiOperation({ summary: '获取笔记详情' })
     @Get('/:uuid')

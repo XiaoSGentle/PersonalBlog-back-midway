@@ -3,7 +3,7 @@ import {
     App,
     Configuration,
     Inject,
-    MidwayDecoratorService
+    MidwayDecoratorService,
 } from '@midwayjs/core';
 import * as cos from '@midwayjs/cos';
 import * as crossDomain from '@midwayjs/cross-domain';
@@ -16,8 +16,10 @@ import * as typeorm from '@midwayjs/typeorm';
 import * as upload from '@midwayjs/upload';
 import * as validate from '@midwayjs/validate';
 import { join } from 'path';
-import { DefaultErrorFilter } from './filter/default.filter';
-import { UnauthorizedFilter } from './filter/identity.filter';
+import {
+    TokenExpiredFilter,
+    UnauthorizedFilter,
+} from './filter/identity.filter';
 import { NotFoundFilter } from './filter/notfound.filter';
 import { ValidateErrorFilter } from './filter/validate.filter';
 import { UserGuard } from './guard/UserGuard';
@@ -57,7 +59,7 @@ export class ContainerLifeCycle {
         this.app.useFilter([
             NotFoundFilter,
             ValidateErrorFilter,
-            DefaultErrorFilter,
+            TokenExpiredFilter,
             UnauthorizedFilter,
         ]);
         // 使用管道
