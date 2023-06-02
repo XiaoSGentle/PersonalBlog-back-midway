@@ -5,6 +5,7 @@ export enum ApiMsg {
     NO_LOGIN = '未登录',
     NOT_FOND_PATH = '未找到该请求',
     TOKEN_EXPIRED = '登录状态过期',
+    TOKEN_INVALID = 'TOKEN错误',
 }
 export enum ApiCode {
     SUCCESS = 200,
@@ -14,4 +15,5 @@ export enum ApiCode {
     NOT_FOND_PATH = 404,
     VALIDATION_ERROR = 422,
     TOKEN_EXPIRED = 419,
+    TOKEN_INVALID = 498,
 }

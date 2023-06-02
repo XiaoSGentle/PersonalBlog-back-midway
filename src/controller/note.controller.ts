@@ -15,10 +15,11 @@ import {
     ApiOperation,
     ApiTags,
 } from '@midwayjs/swagger';
-import { AddOrUpdateNoteParam } from '../dto/note/AddOrUpdateNoteParam';
+import { UpdateNoteParam } from '../dto/note/UpdateNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
 import { NoteService } from '../service/note.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
+import { AddNoteParam } from '../dto/note/AddNoteParam';
 
 @ApiBearerAuth()
 @ApiTags('笔记')
@@ -54,8 +55,11 @@ export class NoteController {
      */
     @ApiOperation({ summary: '新增笔记' })
     @Post('/')
-    async addNote(@Query('createUuid') createUuid: string) {
-        return ApiResult.ok(await this.noteService.addNote(createUuid));
+    @ApiBody({
+        type: AddNoteParam,
+    })
+    async addNote(@Body() addNoteParam: AddNoteParam) {
+        return ApiResult.ok(await this.noteService.addNote(addNoteParam));
     }
     /**
      * 更新笔记
@@ -65,9 +69,9 @@ export class NoteController {
     @ApiOperation({ summary: '更新笔记' })
     @Put('/')
     @ApiBody({
-        type: AddOrUpdateNoteParam,
+        type: UpdateNoteParam,
     })
-    async updateNote(@Body() param: AddOrUpdateNoteParam) {
+    async updateNote(@Body() param: UpdateNoteParam) {
         return ApiResult.ok(this.noteService.updateNote(param));
     }
     /**

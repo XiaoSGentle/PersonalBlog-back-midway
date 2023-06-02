@@ -1,8 +1,8 @@
 /* eslint-disable no-empty */
-import { Provide } from '@midwayjs/core';
+import { Inject, Provide } from '@midwayjs/core';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
-import { AddOrUpdateNoteParam } from '../dto/note/AddOrUpdateNoteParam';
+import { UpdateNoteParam } from '../dto/note/UpdateNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
 import { FunNote } from '../entity/FunNote';
 import { RelNoteClassify } from '../entity/RelNoteClassify';
@@ -10,6 +10,8 @@ import { Pagination } from '../util/Page/Pagination';
 import { StringUtils } from '../util/String/StringUtil';
 import { TimeUtil } from '../util/Time/TimeUtil';
 import { getUUID } from '../util/UUID/UUID';
+import { AddNoteParam } from '../dto/note/AddNoteParam';
+import { Context } from '@midwayjs/koa';
 
 @Provide()
 export class NoteService {
@@ -18,13 +20,15 @@ export class NoteService {
     @InjectEntityModel(RelNoteClassify)
     noteClassifyModel: Repository<RelNoteClassify>;
 
+    @Inject()
+    ctx: Context;
     // 添加
-    async addNote(creatorUuid: string) {
-        const note = createNewNote(creatorUuid);
+    async addNote(param: AddNoteParam) {
+        const note = this.createNewNote(param);
         return await this.noteModel.save(note);
     }
     // 修改
-    async updateNote(param: AddOrUpdateNoteParam) {
+    async updateNote(param: UpdateNoteParam) {
         const note = new FunNote();
         const reInSql = await this.noteModel.findOne({
             where: { uuid: param.uuid },
@@ -40,8 +44,8 @@ export class NoteService {
         const query: SelectQueryBuilder<FunNote> =
             this.noteModel.createQueryBuilder();
         if (!StringUtils.isEmpty(param.classfiyUuids)) {
-            query.andWhere('classification_uuid in ( :classificationUuids )', {
-                classificationUuids: param.classfiyUuids.toString(),
+            query.andWhere('classification_uuid = :classificationUuids', {
+                classificationUuids: param.classfiyUuids,
             });
         }
         if (!StringUtils.isEmpty(param.keyword)) {
@@ -63,15 +67,18 @@ export class NoteService {
     async getAllNoteClassify() {
         return await this.noteClassifyModel.find();
     }
-}
-function createNewNote(creatorUuid: string) {
-    const note = new FunNote();
-    note.creatorUuid = creatorUuid;
-    note.del = 0;
-    note.createTime = TimeUtil.GetNowTime();
-    note.updateTime = TimeUtil.GetNowTime();
-    note.readNum = 0;
-    note.starNum = 0;
-    note.uuid = getUUID();
-    return note;
+    createNewNote(param: AddNoteParam) {
+        const note = new FunNote();
+        Object.assign(note, param);
+        note.content = '🖋️开始愉快的写文章吧';
+        note.tags = param.tags.toString();
+        note.creatorUuid = this.ctx.user.uuid;
+        note.del = 0;
+        note.createTime = TimeUtil.GetNowTime();
+        note.updateTime = TimeUtil.GetNowTime();
+        note.readNum = 0;
+        note.starNum = 0;
+        note.uuid = getUUID();
+        return note;
+    }
 }

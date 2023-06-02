@@ -15,10 +15,11 @@ import {
     ApiOperation,
     ApiTags,
 } from '@midwayjs/swagger';
-import { addMessageParam } from '../dto/message/addMessageParam';
+
 import { MessageService } from '../service/message.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { Pageparam } from '../util/Page/PageParam';
+import { AddMessageParam } from '../dto/message/AddMessageParam';
 
 @ApiBearerAuth()
 @ApiTags('留言')
@@ -52,9 +53,9 @@ export class MessageController {
     @ApiOperation({ summary: '添加留言' })
     @Post('')
     @ApiBody({
-        type: addMessageParam,
+        type: AddMessageParam,
     })
-    async addMessage(@Body() param: addMessageParam) {
+    async addMessage(@Body() param: AddMessageParam) {
         return ApiResult.ok(await this.messageService.save(param));
     }
     /**

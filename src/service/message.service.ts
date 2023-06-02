@@ -1,8 +1,8 @@
 import { Inject, Provide } from '@midwayjs/core';
+import { Context } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
-import { Context } from '@midwayjs/koa';
-import { addMessageParam } from '../dto/message/addMessageParam';
+import { AddMessageParam } from '../dto/message/AddMessageParam';
 import { FunMessage } from '../entity/FunMessage';
 import { Pageparam } from '../util/Page/PageParam';
 import { Pagination } from '../util/Page/Pagination';
@@ -25,7 +25,7 @@ export class MessageService {
         return result;
     }
     // 添加留言
-    async save(addMessageParam: addMessageParam) {
+    async save(addMessageParam: AddMessageParam) {
         const addParam = new FunMessage();
         addParam.uuid = getUUID();
         addParam.browser = ReqUtil.getBrowser(this.ctx);

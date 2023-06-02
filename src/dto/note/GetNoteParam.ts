@@ -10,9 +10,9 @@ export class GetNoteParam extends Pageparam {
     @Rule(RuleType.string().empty(''))
     @ApiProperty({
         description: '分类uuid',
-        example: ['16843920727193'],
+        example: '16843920727193',
     })
-    classfiyUuids: string[];
+    classfiyUuids: string;
 
     @Rule(RuleType.string().empty(''))
     @ApiProperty({ description: '收藏者的uuid', example: '10203281021' })

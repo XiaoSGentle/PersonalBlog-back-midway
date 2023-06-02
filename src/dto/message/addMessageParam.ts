@@ -1,7 +1,7 @@
 import { ApiProperty } from '@midwayjs/swagger';
 import { Rule, RuleType } from '@midwayjs/validate';
 
-export class addMessageParam {
+export class AddMessageParam {
     @Rule(RuleType.string().required().min(2).max(10))
     @ApiProperty({ description: '评论人的名称', example: 'admin' })
     name: string;
