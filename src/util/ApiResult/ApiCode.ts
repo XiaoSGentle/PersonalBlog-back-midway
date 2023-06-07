@@ -6,10 +6,14 @@ export enum ApiMsg {
     NOT_FOND_PATH = '未找到该请求',
     TOKEN_EXPIRED = '登录状态过期',
     TOKEN_INVALID = 'TOKEN错误',
+    DELETE_FAIL = '删除失败',
+    DELETE_SUCCESS = '删除成功',
+    UPDATE_FAIL = '更新失败',
+    UPDATE_SUCCESS = '更新成功',
 }
 export enum ApiCode {
     SUCCESS = 200,
-
+    TIP_SUCCESS = 299,
     FAILE = 400,
     UNAUTHORIZED = 401,
     NOT_FOND_PATH = 404,

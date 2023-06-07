@@ -67,6 +67,12 @@ export class NoteService {
     async getAllNoteClassify() {
         return await this.noteClassifyModel.find();
     }
+    // 获取登录用户的笔记
+    async getAllNoteByUser() {
+        return await this.noteModel.find({
+            where: { creatorUuid: this.ctx.user.uuid },
+        });
+    }
     createNewNote(param: AddNoteParam) {
         const note = new FunNote();
         Object.assign(note, param);

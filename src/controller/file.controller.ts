@@ -1,13 +1,14 @@
 import { Controller, Files, Inject, Post } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
-import { ApiTags } from '@midwayjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@midwayjs/swagger';
 import { FileService } from '../service/file.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { getUUID } from '../util/UUID/UUID';
 
+@ApiBearerAuth()
 @ApiTags('文件')
 @Controller('/')
-export class HomeController {
+export class FileController {
     @Inject()
     ctx: Context;
 
@@ -31,9 +32,8 @@ export class HomeController {
         );
     }
 
-    // TODO: 文件流输出待做
+    //: 文件流输出待做
     // @Post('/file')
     // async getImage(imageName: string): Promise<Response> {
-    //     return new Response(Image(), null);
     // }
 }

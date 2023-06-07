@@ -10,7 +10,7 @@ import { JwtUtil } from '../util/Jwt/Jwt';
 
 @ApiTags('用户')
 @Controller('/')
-export class APIController {
+export class UserController {
     @Inject()
     ctx: Context;
 

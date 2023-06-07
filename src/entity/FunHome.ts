@@ -27,18 +27,26 @@ export class FunHome extends BaseEntity {
     pos: string | null;
 
     @Column('varchar', {
-        name: 'cid',
+        name: 'content',
         nullable: true,
-        comment: '子id',
+        comment: '名言内容',
         length: 255,
     })
-    cid: string | null;
+    content: string | null;
+
+    @Column('varchar', {
+        name: 'author',
+        nullable: true,
+        comment: '作者',
+        length: 255,
+    })
+    author: string | null;
 
     @Column('varchar', {
         name: 'des',
         nullable: true,
         comment: '描述',
-        length: 255,
+        length: 500,
     })
     des: string | null;
 

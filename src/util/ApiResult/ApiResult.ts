@@ -1,5 +1,5 @@
 import { ApiProperty } from '@midwayjs/swagger';
-import { ApiCode } from './ApiCode';
+import { ApiCode, ApiMsg } from './ApiCode';
 
 /**
  * 统一返回
@@ -15,6 +15,20 @@ export class ApiResult {
         if (check(data)) {
             result.data = data;
         }
+        return result;
+    }
+    static delStatus(status: boolean): resultFormat {
+        const result = new resultFormat();
+        result.success = status;
+        result.status = status ? ApiCode.TIP_SUCCESS : ApiCode.FAILE;
+        result.msg = status ? ApiMsg.DELETE_SUCCESS : ApiMsg.DELETE_FAIL;
+        return result;
+    }
+    static upStatus(status: boolean): resultFormat {
+        const result = new resultFormat();
+        result.success = status;
+        result.status = status ? ApiCode.TIP_SUCCESS : ApiCode.FAILE;
+        result.msg = status ? ApiMsg.UPDATE_SUCCESS : ApiMsg.UPDATE_FAIL;
         return result;
     }
     static fail(code?: any, msg?: any): resultFormat {

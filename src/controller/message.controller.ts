@@ -77,7 +77,7 @@ export class MessageController {
      */
     @ApiOperation({ summary: '获取留言详情' })
     @Get('/:uuid')
-    async getAllMessage(@Param('uuid') param: string) {
+    async getAllMessage() {
         return ApiResult.ok();
     }
 }

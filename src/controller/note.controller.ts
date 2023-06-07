@@ -1,6 +1,7 @@
 import {
     Body,
     Controller,
+    Del,
     Get,
     Inject,
     Param,
@@ -95,5 +96,25 @@ export class NoteController {
     @Get('/classify')
     async getAllNoteClassify() {
         return ApiResult.ok(await this.noteService.getAllNoteClassify());
+    }
+    /**
+     * 获取登录用户的笔记
+     * @returns 结果
+     */
+    @ApiOperation({ summary: '获取登录用户的笔记' })
+    @Get('/user')
+    async getNotesByUser() {
+        return ApiResult.ok(await this.noteService.getAllNoteByUser());
+    }
+    /**
+     * 获取登录用户的笔记
+     * @returns 结果
+     */
+    @ApiOperation({ summary: '根据uuid删除笔记' })
+    @Del('/:uuid')
+    async delNoteByUuid(@Param('uuid') uuid: string) {
+        return (await this.noteService.noteModel.delete(uuid)).affected > 0
+            ? ApiResult.delStatus(true)
+            : ApiResult.delStatus(false); // 如果删除成功，返回成功的响
     }
 }
