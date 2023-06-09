@@ -3,9 +3,8 @@ import { Context, NextFunction } from '@midwayjs/koa';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository } from 'typeorm';
 import { SysLog } from '../entity/SysLog';
+import { TimeUtil, getUUID } from '../util/Other/Utils';
 import { ReqUtil } from '../util/ReqUtil/ReqUtil';
-import { TimeUtil } from '../util/Time/TimeUtil';
-import { getUUID } from '../util/UUID/UUID';
 
 @Middleware()
 export class ReportMiddleware implements IMiddleware<Context, NextFunction> {

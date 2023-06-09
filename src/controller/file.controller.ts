@@ -3,7 +3,7 @@ import { Context } from '@midwayjs/koa';
 import { ApiBearerAuth, ApiTags } from '@midwayjs/swagger';
 import { FileService } from '../service/file.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
-import { getUUID } from '../util/UUID/UUID';
+import { getUUID } from '../util/Other/Utils';
 
 @ApiBearerAuth()
 @ApiTags('文件')

@@ -1,13 +1,4 @@
-import {
-    Body,
-    Controller,
-    Del,
-    Get,
-    Inject,
-    Param,
-    Post,
-    Query,
-} from '@midwayjs/core';
+import { Body, Controller, Get, Inject, Post, Query } from '@midwayjs/core';
 import { Context } from '@midwayjs/koa';
 import {
     ApiBearerAuth,
@@ -16,10 +7,10 @@ import {
     ApiTags,
 } from '@midwayjs/swagger';
 
+import { AddMessageParam } from '../dto/message/AddMessageParam';
 import { MessageService } from '../service/message.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { Pageparam } from '../util/Page/PageParam';
-import { AddMessageParam } from '../dto/message/AddMessageParam';
 
 @ApiBearerAuth()
 @ApiTags('留言')
@@ -57,27 +48,5 @@ export class MessageController {
     })
     async addMessage(@Body() param: AddMessageParam) {
         return ApiResult.ok(await this.messageService.save(param));
-    }
-    /**
-     * 删除留言
-     * @param pageParam
-     * @returns
-     */
-    @ApiOperation({ summary: '删除留言' })
-    @Del('/:uuid')
-    async delMessage(@Param('uuid') param: string) {
-        return ApiResult.ok(
-            await this.messageService.messageModel.softDelete([param])
-        );
-    }
-    /**
-     * 删除留言
-     * @param pageParam
-     * @returns
-     */
-    @ApiOperation({ summary: '获取留言详情' })
-    @Get('/:uuid')
-    async getAllMessage() {
-        return ApiResult.ok();
     }
 }

@@ -3,14 +3,13 @@ import { InfoService } from '@midwayjs/info';
 import { Context } from '@midwayjs/koa';
 import { ApiBody, ApiOperation, ApiTags } from '@midwayjs/swagger';
 import { CerateUserParam } from '../dto/user/CreateUserParam';
-import { LoginParam } from '../dto/user/LoginParam';
 import { DictService } from '../service/dict.service';
 import { UserService } from '../service/user.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { JwtUtil } from '../util/Jwt/Jwt';
 
-@ApiTags('用户')
-@Controller('/')
+@ApiTags('管理员:用户')
+@Controller('/admin/')
 export class UserController {
     @Inject()
     ctx: Context;
@@ -26,20 +25,6 @@ export class UserController {
 
     @Inject()
     dictService: DictService;
-
-    @ApiOperation({ summary: '用户登录' })
-    @Post('/Login')
-    @ApiBody({
-        type: LoginParam,
-    })
-    async Login(@Body() user: LoginParam): Promise<ApiResult> {
-        const result = await this.userService.Login(user);
-        result.password = '';
-        return ApiResult.ok({
-            userInfo: result,
-            token: await this.jwtUtil.jwtSign({ uuid: result.uuid }),
-        });
-    }
 
     @ApiOperation({ summary: '用户创建' })
     @Post('/addUser')

@@ -7,6 +7,7 @@
     "@midwayjs/bootstrap": "^3.11.6",
     "@midwayjs/casbin": "^3.11.9",
     "@midwayjs/casbin-typeorm-adapter": "^3.11.9",
+    "@midwayjs/cli": "^2.1.1",
     "@midwayjs/core": "^3.11.6",
     "@midwayjs/cos": "^3.11.9",
     "@midwayjs/cross-domain": "^3.11.9",
@@ -30,7 +31,6 @@
     "typeorm": "^0.3.16"
   },
   "devDependencies": {
-    "@midwayjs/cli": "^2.1.0",
     "@midwayjs/mock": "^3.11.9",
     "@types/jest": "^29.5.1",
     "@types/koa": "^2.13.6",

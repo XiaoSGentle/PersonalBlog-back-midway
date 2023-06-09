@@ -4,11 +4,10 @@ import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 import { AddMessageParam } from '../dto/message/AddMessageParam';
 import { FunMessage } from '../entity/FunMessage';
+import { TimeUtil, getUUID } from '../util/Other/Utils';
 import { Pageparam } from '../util/Page/PageParam';
 import { Pagination } from '../util/Page/Pagination';
 import { ReqUtil } from '../util/ReqUtil/ReqUtil';
-import { TimeUtil } from '../util/Time/TimeUtil';
-import { getUUID } from '../util/UUID/UUID';
 @Provide()
 export class MessageService {
     @Inject()

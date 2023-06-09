@@ -67,6 +67,7 @@ export default (appInfo: MidwayAppInfo) => {
             auth: {
                 authType: 'bearer',
             },
+            tagSortable: true,
         },
         // 腾讯云存储桶
         cos: {

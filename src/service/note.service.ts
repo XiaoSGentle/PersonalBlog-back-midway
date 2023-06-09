@@ -2,16 +2,14 @@
 import { Inject, Provide } from '@midwayjs/core';
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
-import { UpdateNoteParam } from '../dto/note/UpdateNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
+import { UpdateNoteParam } from '../dto/note/UpdateNoteParam';
 import { FunNote } from '../entity/FunNote';
 import { RelNoteClassify } from '../entity/RelNoteClassify';
+import { StringUtils, TimeUtil, getUUID } from '../util/Other/Utils';
 import { Pagination } from '../util/Page/Pagination';
-import { StringUtils } from '../util/String/StringUtil';
-import { TimeUtil } from '../util/Time/TimeUtil';
-import { getUUID } from '../util/UUID/UUID';
-import { AddNoteParam } from '../dto/note/AddNoteParam';
 import { Context } from '@midwayjs/koa';
+import { AddNoteParam } from '../dto/note/AddNoteParam';
 
 @Provide()
 export class NoteService {

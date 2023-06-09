@@ -40,6 +40,9 @@ export class FunNote extends BaseEntity {
     @Column('text', { name: 'title', nullable: true, comment: '标题' })
     title: string | null;
 
+    @Column('int', { name: 'is_show', nullable: true, comment: '是否展示' })
+    isShow: string | null;
+
     @Column('varchar', {
         name: 'banner',
         nullable: true,
