@@ -17,8 +17,9 @@ export class AdminMessageController {
     @ApiOperation({ summary: '删除留言' })
     @Del('/:uuid')
     async delMessage(@Param('uuid') param: string) {
-        return ApiResult.ok(
-            await this.messageService.messageModel.softDelete(param)
-        );
+        return (await this.messageService.messageModel.delete(param)).affected >
+            0
+            ? ApiResult.delStatus(true)
+            : ApiResult.delStatus(false);
     }
 }

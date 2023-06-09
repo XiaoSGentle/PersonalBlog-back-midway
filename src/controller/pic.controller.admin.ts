@@ -13,6 +13,7 @@ import {
     ApiBearerAuth,
     ApiBody,
     ApiOperation,
+    ApiParam,
     ApiTags,
 } from '@midwayjs/swagger';
 import { Context } from 'koa';
@@ -43,9 +44,11 @@ export default class AdminPicController {
 
     @ApiOperation({ summary: '根据分类获取所有照片' })
     @Get('/')
-    async getPicsByPos(
-        @Query('pic_grourment,pic_view,pic_about_me') classify: string
-    ) {
+    @ApiParam({
+        name: 'classify',
+        example: 'pic_grourment,pic_view,pic_about_me',
+    })
+    async getPicsByPos(@Query('classify') classify: string) {
         return ApiResult.ok(
             await this.photoService.photoModel.find({
                 where: { classify: classify },

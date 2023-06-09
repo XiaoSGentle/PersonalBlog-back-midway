@@ -3,6 +3,7 @@ import {
     ApiBearerAuth,
     ApiBody,
     ApiOperation,
+    ApiParam,
     ApiTags,
 } from '@midwayjs/swagger';
 import { UpdateUserInfoParam } from '../dto/home/UpdateUserInfoParam';
@@ -55,9 +56,11 @@ export class HomeController {
     }
     @ApiOperation({ summary: '获取首页所有可以随机的名言' })
     @Get('/allSaying')
-    async allSaying(@Query('saying,myself') proverbEnum: string) {
-        return ApiResult.ok(
-            await this.proverbService.getAllSaying(proverbEnum)
-        );
+    @ApiParam({
+        name: 'classify',
+        example: 'saying,myself',
+    })
+    async allSaying(@Query('classify') classify: string) {
+        return ApiResult.ok(await this.proverbService.getAllSaying(classify));
     }
 }
