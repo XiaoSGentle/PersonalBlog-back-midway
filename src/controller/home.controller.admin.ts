@@ -42,7 +42,7 @@ export class HomeController {
         type: UpdateUserInfoParam,
     })
     async setBlogInfo(@Body() userInfo: UpdateUserInfoParam) {
-        this.dictService.setBlogInfo(userInfo)
+        return this.dictService.setBlogInfo(userInfo)
             ? ApiResult.upStatus(true)
             : ApiResult.upStatus(false);
     }

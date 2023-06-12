@@ -43,7 +43,7 @@ export default class AdminPicController {
     photoService: PhotoService;
 
     @ApiOperation({ summary: '根据分类获取所有照片' })
-    @Get('/')
+    @Get('/classify')
     @ApiParam({
         name: 'classify',
         example: 'pic_grourment,pic_view,pic_about_me',
@@ -52,6 +52,15 @@ export default class AdminPicController {
         return ApiResult.ok(
             await this.photoService.photoModel.find({
                 where: { classify: classify },
+            })
+        );
+    }
+    @ApiOperation({ summary: '根据uuid获取照片' })
+    @Get('/:uuid')
+    async getPicsByUUID(@Param('uuid') uuid: string) {
+        return ApiResult.ok(
+            await this.photoService.photoModel.findOne({
+                where: { uuid: uuid },
             })
         );
     }
@@ -82,9 +91,9 @@ export default class AdminPicController {
         const updateParam = new FunPhoto();
         Object.assign(updateParam, updatePhotoParam);
         updateParam.updateTime = TimeUtil.GetNowTime();
-        return ApiResult.ok(
-            await this.photoService.photoModel.save(updateParam)
-        );
+        return (await this.photoService.photoModel.save(updateParam))
+            ? ApiResult.upStatus(true)
+            : ApiResult.upStatus(false);
     }
 
     @ApiOperation({ summary: '添加照片' })

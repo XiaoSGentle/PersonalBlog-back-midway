@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post, Query } from '@midwayjs/core';
+import { Body, Controller, Get, Inject, Put, Query } from '@midwayjs/core';
 import {
     ApiBearerAuth,
     ApiBody,
@@ -40,12 +40,11 @@ export class BannerController {
         );
     }
     @ApiOperation({ summary: '修改指定位置的顶部banner信息' })
-    @Post('/')
+    @Put('/')
     @ApiBody({ type: UpdataBannerParam })
     async updateBanner(@Body() updataBannerParam: UpdataBannerParam) {
         const upParam = new SysBanner();
         Object.assign(upParam, updataBannerParam); // 复制值给对象参数。
-
         return (await this.bannerService.bannerModel.save(upParam))
             ? ApiResult.upStatus(true)
             : ApiResult.upStatus(false);

@@ -11,7 +11,7 @@ export class UpdateUserInfoParam {
 
     @Rule(RuleType.string().required())
     @ApiProperty({ description: '座右铭内容', example: '人生如戏,全靠演技' })
-    content: string;
+    motto: string;
 
     @Rule(RuleType.string().required())
     @ApiProperty({

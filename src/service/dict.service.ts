@@ -36,8 +36,9 @@ export class DictService {
      * @param options 参数对象
      */
     private updateDict(classify: FunEnums, options: any): boolean {
-        let successTag = false;
-        Object.getOwnPropertyNames(options).forEach(async key => {
+        let successTag = true;
+        const keys = Object.getOwnPropertyNames(options);
+        keys.forEach(async key => {
             const query = this.dictModel
                 .createQueryBuilder()
                 .update()
@@ -45,7 +46,7 @@ export class DictService {
             query.set({ value: options[key] });
             query.andWhere('key = :key', { key: key });
             const reSql = await query.execute();
-            reSql.affected > 0 ? (successTag = true) : (successTag = false);
+            successTag = reSql.affected > 0;
         });
         return successTag;
     }
