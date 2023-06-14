@@ -10,6 +10,8 @@ export enum FunEnums {
     PIC = 'pic',
     // 笔记
     NOTE = 'note',
+    // 统计
+    STATISTICS = 'statistics',
 }
 
 /**
@@ -37,7 +39,23 @@ export enum PicEnums {
     // 关于我
     ABOUT_ME = 'pic_about_me',
 }
+/**
+ * 名言类型枚举
+ */
 export enum ProverbEnums {
     SAYING = 'saying',
     MYSELF = 'myself',
+}
+/**
+ * 每日统计枚举
+ */
+export enum StatisticsEnums {
+    // 日流量
+    FLOW_RATE = 'flow_rate_count',
+    // 注册人数
+    SING_IN = 'sing_in_count',
+    // 审核文章数量
+    ARTICLE = 'article_count',
+    // 新留言数量
+    MESSAGE = 'message_count',
 }

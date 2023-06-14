@@ -41,7 +41,7 @@ export class FunNote extends BaseEntity {
     title: string | null;
 
     @Column('int', { name: 'is_show', nullable: true, comment: '是否展示' })
-    isShow: string | null;
+    isShow: number | null;
 
     @Column('varchar', {
         name: 'banner',
@@ -67,20 +67,16 @@ export class FunNote extends BaseEntity {
     @Column('int', { name: 'del', nullable: true, comment: '逻辑删除' })
     del: number | null;
 
-    @CreateDateColumn({
-        type: 'timestamp',
-    })
-    @Column('datetime', {
+    @CreateDateColumn({})
+    @Column({
         name: 'create_time',
         nullable: true,
         comment: '创建时间',
     })
     createTime: string | null;
 
-    @UpdateDateColumn({
-        type: 'timestamp',
-    })
-    @Column('datetime', {
+    @UpdateDateColumn({})
+    @Column({
         name: 'update_time',
         nullable: true,
         comment: '最后更新时间',

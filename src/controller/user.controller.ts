@@ -1,13 +1,23 @@
-import { Body, Controller, Get, Inject, Post } from '@midwayjs/core';
+import {
+    Body,
+    Controller,
+    Get,
+    Inject,
+    MidwayWebRouterService,
+    Post,
+} from '@midwayjs/core';
 import { InfoService } from '@midwayjs/info';
 import { Context } from '@midwayjs/koa';
 import { ApiBody, ApiOperation, ApiTags } from '@midwayjs/swagger';
+import { AddStatisticsNum } from '../decorator/statistics.decorator';
 import { CerateUserParam } from '../dto/user/CreateUserParam';
 import { LoginParam } from '../dto/user/LoginParam';
+import { StatisticsEnums } from '../enum/FunEnums';
 import { DictService } from '../service/dict.service';
 import { UserService } from '../service/user.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { JwtUtil } from '../util/Jwt/Jwt';
+import { log } from 'console';
 
 @ApiTags('用户')
 @Controller('/')
@@ -19,6 +29,9 @@ export class UserController {
     userService: UserService;
 
     @Inject()
+    webRouterService: MidwayWebRouterService;
+
+    @Inject()
     infoService: InfoService;
 
     @Inject()
@@ -28,7 +41,7 @@ export class UserController {
     dictService: DictService;
 
     @ApiOperation({ summary: '用户登录' })
-    @Post('/Login')
+    @Post('/Login', { description: '用户登录' })
     @ApiBody({
         type: LoginParam,
     })
@@ -40,9 +53,9 @@ export class UserController {
             token: await this.jwtUtil.jwtSign({ uuid: result.uuid }),
         });
     }
-
+    @AddStatisticsNum(StatisticsEnums.SING_IN)
     @ApiOperation({ summary: '用户创建' })
-    @Post('/addUser')
+    @Post('/addUser', { description: '用户注册' })
     @ApiBody({
         type: CerateUserParam,
     })
@@ -52,8 +65,10 @@ export class UserController {
     }
 
     @ApiOperation({ summary: '测试专用' })
-    @Get('/test')
+    @Get('/test', { description: '测试用接口' })
     async test() {
-        this.dictService.getBlogInfo();
+        // this.dictService.addStatisticsNum(StatisticsEnums.ARTICLE);
+        const routes = await this.webRouterService.getFlattenRouterTable();
+        log(routes);
     }
 }

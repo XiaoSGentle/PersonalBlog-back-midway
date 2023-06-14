@@ -16,6 +16,7 @@ import * as typeorm from '@midwayjs/typeorm';
 import * as upload from '@midwayjs/upload';
 import * as validate from '@midwayjs/validate';
 import { join } from 'path';
+import { STATISTICS_KEY } from './decorator/statistics.decorator';
 import {
     TokenExpiredFilter,
     UnauthorizedFilter,
@@ -25,6 +26,7 @@ import { ValidateErrorFilter } from './filter/validate.filter';
 import { UserGuard } from './guard/UserGuard';
 import { JwtMiddleware } from './middleware/jwt.middleware';
 import { ReportMiddleware } from './middleware/report.middleware';
+import { DictService } from './service/dict.service';
 
 @Configuration({
     imports: [
@@ -38,10 +40,7 @@ import { ReportMiddleware } from './middleware/report.middleware';
         jwt,
         upload,
         crossDomain,
-        {
-            component: info,
-            enabledEnvironment: ['local'],
-        },
+        info,
     ],
     importConfigs: [join(__dirname, './config')],
 })
@@ -51,6 +50,9 @@ export class ContainerLifeCycle {
 
     @Inject()
     decoratorService: MidwayDecoratorService;
+
+    @Inject()
+    dictService: DictService;
 
     async onReady() {
         // 使用中间件
@@ -64,5 +66,13 @@ export class ContainerLifeCycle {
         ]);
         // 使用管道
         this.app.useGuard(UserGuard);
+        // 方法装饰器的实现
+        this.decoratorService.registerMethodHandler(STATISTICS_KEY, option => {
+            return {
+                before: async () => {
+                    this.dictService.addStatisticsNum(option.metadata.key);
+                },
+            };
+        });
     }
 }

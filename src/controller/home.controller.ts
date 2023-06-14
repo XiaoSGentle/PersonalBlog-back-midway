@@ -1,11 +1,5 @@
-import { Body, Controller, Get, Inject, Post } from '@midwayjs/core';
-import {
-    ApiBearerAuth,
-    ApiBody,
-    ApiOperation,
-    ApiTags,
-} from '@midwayjs/swagger';
-import { UpdateUserInfoParam } from '../dto/home/UpdateUserInfoParam';
+import { Controller, Get, Inject } from '@midwayjs/core';
+import { ApiBearerAuth, ApiOperation, ApiTags } from '@midwayjs/swagger';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
 import { ProverbEnums } from '../enum/FunEnums';
 import { BannerService } from '../service/banner.service';
@@ -35,7 +29,7 @@ export class HomeController {
      * @returns 主页数据
      */
     @ApiOperation({ summary: '获取主页数据' })
-    @Get('/')
+    @Get('/', { description: '获取主页数据' })
     async index() {
         const homeInfoVo = {
             banner: {
@@ -66,22 +60,5 @@ export class HomeController {
         param.pageSize = 6;
         homeInfoVo.note2 = (await this.noteService.getAllNote(param)).data;
         return ApiResult.ok(homeInfoVo);
-    }
-
-    @ApiOperation({ summary: '获取网站主页信息' })
-    @Get('/blogInfo')
-    async getUserInfo() {
-        return ApiResult.ok(await this.dictService.getBlogInfo());
-    }
-
-    @ApiOperation({ summary: '修改网站主页信息' })
-    @Post('/blogInfo')
-    @ApiBody({
-        type: UpdateUserInfoParam,
-    })
-    async setBlogInfo(@Body() userInfo: UpdateUserInfoParam) {
-        (await this.dictService.setBlogInfo(userInfo))
-            ? ApiResult.upStatus(true)
-            : ApiResult.upStatus(false);
     }
 }

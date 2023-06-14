@@ -78,6 +78,7 @@ export class NoteService {
         note.tags = param.tags.toString();
         note.creatorUuid = this.ctx.user.uuid;
         note.del = 0;
+        note.isShow = 0;
         note.createTime = TimeUtil.GetNowTime();
         note.updateTime = TimeUtil.GetNowTime();
         note.readNum = 0;

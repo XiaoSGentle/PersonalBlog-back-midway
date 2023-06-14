@@ -46,4 +46,26 @@ export class SysLog {
         length: 255,
     })
     port: string | null;
+    @Column('varchar', {
+        name: 'user_id',
+        nullable: true,
+        comment: '用户id',
+        length: 255,
+    })
+    userId: string | null;
+
+    @Column('varchar', {
+        name: 'method',
+        nullable: true,
+        comment: '访问的方法',
+        length: 255,
+    })
+    method: string | null;
+
+    @Column('longtext', {
+        name: 'data',
+        nullable: true,
+        comment: '访问的方法',
+    })
+    data: any | null;
 }

@@ -42,6 +42,7 @@ export default (appInfo: MidwayAppInfo) => {
                     username: 'root',
                     password: 'chaoyang583355',
                     database: 'personal_blog',
+                    synchronize: false,
                     entities: [CasbinRule],
                 },
             },

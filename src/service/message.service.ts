@@ -24,15 +24,12 @@ export class MessageService {
         return result;
     }
     // 添加留言
-    async save(addMessageParam: AddMessageParam) {
+    async addMessage(addMessageParam: AddMessageParam) {
         const addParam = new FunMessage();
         addParam.uuid = getUUID();
         addParam.browser = ReqUtil.getBrowser(this.ctx);
         addParam.ip = ReqUtil.getIp(this.ctx);
-        addParam.avatar = addMessageParam.avatar;
-        addParam.content = addMessageParam.content;
-        addParam.name = addMessageParam.name;
-        addParam.isVisitor = addMessageParam.isVisitor;
+        Object.assign(addParam, addMessageParam);
         addParam.createTime = TimeUtil.GetNowTime();
         addParam.del = 0;
         addParam.updateTime = TimeUtil.GetNowTime();

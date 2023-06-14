@@ -37,20 +37,17 @@ export class FunPhoto extends BaseEntity {
         length: 255,
     })
     url: string | null;
-    @CreateDateColumn({
-        type: 'timestamp',
-    })
-    @Column('datetime', {
+
+    @CreateDateColumn({})
+    @Column({
         name: 'create_time',
         nullable: true,
         comment: '创建时间',
     })
     createTime: string | null;
 
-    @UpdateDateColumn({
-        type: 'timestamp',
-    })
-    @Column('datetime', {
+    @UpdateDateColumn({})
+    @Column({
         name: 'update_time',
         nullable: true,
         comment: '最后更新时间',

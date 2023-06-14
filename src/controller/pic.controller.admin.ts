@@ -43,7 +43,7 @@ export default class AdminPicController {
     photoService: PhotoService;
 
     @ApiOperation({ summary: '根据分类获取所有照片' })
-    @Get('/classify')
+    @Get('/classify', { description: '根据分类获取照片' })
     @ApiParam({
         name: 'classify',
         example: 'pic_grourment,pic_view,pic_about_me',
@@ -56,7 +56,7 @@ export default class AdminPicController {
         );
     }
     @ApiOperation({ summary: '根据uuid获取照片' })
-    @Get('/:uuid')
+    @Get('/:uuid', { summary: '根据uuid获取照片' })
     async getPicsByUUID(@Param('uuid') uuid: string) {
         return ApiResult.ok(
             await this.photoService.photoModel.findOne({
@@ -66,14 +66,14 @@ export default class AdminPicController {
     }
 
     @ApiOperation({ summary: '根据uuid删除照片' })
-    @Del('/:uuid')
+    @Del('/:uuid', { description: '根据uuid删除照片' })
     async delPicsByPos(@Param('uuid') uuid: string) {
         return (await this.photoService.photoModel.delete(uuid)).affected > 0
             ? ApiResult.delStatus(true)
             : ApiResult.delStatus(false);
     }
     @ApiOperation({ summary: '改变照片的展示状态' })
-    @Put('/show/:uuid')
+    @Put('/show/:uuid', { description: '根据uuid改变该照片的显示状态' })
     async updatePicShowStatus(@Param('uuid') uuid: string) {
         const reSql: FunPhoto = await this.photoService.photoModel.findOne({
             where: { uuid: uuid },
@@ -85,7 +85,7 @@ export default class AdminPicController {
     }
 
     @ApiOperation({ summary: '更新照片' })
-    @Put('/')
+    @Put('/', { description: '根据参数更新照片' })
     @ApiBody({ type: UpdatePhotoParam })
     async updatePicInfo(@Body() updatePhotoParam: UpdatePhotoParam) {
         const updateParam = new FunPhoto();
@@ -97,7 +97,7 @@ export default class AdminPicController {
     }
 
     @ApiOperation({ summary: '添加照片' })
-    @Post('/')
+    @Post('/', { description: '添加照片' })
     @ApiBody({ type: AddPhotoParam })
     async addPicInfo(@Body() AddPhotoParam: AddPhotoParam) {
         const addParam = this.createNewPhoto(AddPhotoParam);

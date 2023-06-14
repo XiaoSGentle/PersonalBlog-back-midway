@@ -11,6 +11,9 @@ import { AddMessageParam } from '../dto/message/AddMessageParam';
 import { MessageService } from '../service/message.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { Pageparam } from '../util/Page/PageParam';
+import { AddStatisticsNum } from '../decorator/statistics.decorator';
+import { StatisticsEnums } from '../enum/FunEnums';
+import { log } from 'console';
 
 @ApiBearerAuth()
 @ApiTags('留言')
@@ -28,7 +31,7 @@ export class MessageController {
      * @returns 分页结果
      */
     @ApiOperation({ summary: '获取所有留言' })
-    @Get('/all')
+    @Get('/all', { description: '获取所有留言' })
     @ApiBody({
         type: Pageparam,
     })
@@ -41,12 +44,14 @@ export class MessageController {
      * @param pageParam
      * @returns
      */
+    @AddStatisticsNum(StatisticsEnums.MESSAGE)
     @ApiOperation({ summary: '添加留言' })
-    @Post('')
+    @Post('/', { description: '添加留言' })
     @ApiBody({
         type: AddMessageParam,
     })
     async addMessage(@Body() param: AddMessageParam) {
-        return ApiResult.ok(await this.messageService.save(param));
+        log(param);
+        return ApiResult.ok(await this.messageService.addMessage(param));
     }
 }
