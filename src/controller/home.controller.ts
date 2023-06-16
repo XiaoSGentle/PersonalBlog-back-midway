@@ -7,6 +7,7 @@ import { DictService } from '../service/dict.service';
 import { NoteService } from '../service/note.service';
 import { ProverbSerice } from '../service/proverb.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
+import { Author } from '../decorator';
 
 @ApiBearerAuth()
 @ApiTags('主页')
@@ -30,6 +31,7 @@ export class HomeController {
      */
     @ApiOperation({ summary: '获取主页数据' })
     @Get('/', { description: '获取主页数据' })
+    @Author([''])
     async index() {
         const homeInfoVo = {
             banner: {

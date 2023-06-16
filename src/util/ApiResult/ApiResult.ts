@@ -38,6 +38,13 @@ export class ApiResult {
         result.msg = status ? ApiMsg.ADD_SUCCESS : ApiMsg.ADD_FAIL;
         return result;
     }
+    static changeStatus(status: boolean): resultFormat {
+        const result = new resultFormat();
+        result.success = status;
+        result.status = status ? ApiCode.TIP_SUCCESS : ApiCode.FAILE;
+        result.msg = status ? ApiMsg.CHANGE_SUCCESS : ApiMsg.CHANGE_FAIL;
+        return result;
+    }
     static fail(code?: any, msg?: any): resultFormat {
         const result = new resultFormat();
         result.success = false;

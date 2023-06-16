@@ -56,7 +56,7 @@ export default class AdminPicController {
         );
     }
     @ApiOperation({ summary: '根据uuid获取照片' })
-    @Get('/:uuid', { summary: '根据uuid获取照片' })
+    @Get('/:uuid', { description: '根据uuid获取照片' })
     async getPicsByUUID(@Param('uuid') uuid: string) {
         return ApiResult.ok(
             await this.photoService.photoModel.findOne({

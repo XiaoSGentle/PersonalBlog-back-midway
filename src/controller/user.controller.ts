@@ -17,7 +17,6 @@ import { DictService } from '../service/dict.service';
 import { UserService } from '../service/user.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { JwtUtil } from '../util/Jwt/Jwt';
-import { log } from 'console';
 
 @ApiTags('用户')
 @Controller('/')
@@ -68,7 +67,7 @@ export class UserController {
     @Get('/test', { description: '测试用接口' })
     async test() {
         // this.dictService.addStatisticsNum(StatisticsEnums.ARTICLE);
-        const routes = await this.webRouterService.getFlattenRouterTable();
-        log(routes);
+        // const routes = await this.webRouterService.getFlattenRouterTable();
+        // log(routes);
     }
 }

@@ -9,7 +9,7 @@ import { ApiResult } from '../util/ApiResult/ApiResult';
 import { JwtUtil } from '../util/Jwt/Jwt';
 
 @ApiTags('管理员:用户')
-@Controller('/admin/')
+@Controller('/admin/user')
 export class UserController {
     @Inject()
     ctx: Context;
@@ -27,7 +27,7 @@ export class UserController {
     dictService: DictService;
 
     @ApiOperation({ summary: '用户创建' })
-    @Post('/addUser')
+    @Post('/', { description: '用户创建' })
     @ApiBody({
         type: CerateUserParam,
     })
@@ -35,9 +35,14 @@ export class UserController {
         const result = await this.userService.Login(user);
         return ApiResult.ok(result);
     }
-
+    @ApiOperation({ summary: '获取所有用户' })
+    @Get('/', { description: '获取所有用户' })
+    async getAllUser(): Promise<ApiResult> {
+        const result = await this.userService.userModel.find();
+        return ApiResult.ok(result);
+    }
     @ApiOperation({ summary: '测试专用' })
-    @Get('/test')
+    @Get('/test', { description: '测试专用' })
     async test() {
         this.dictService.getBlogInfo();
     }

@@ -12,6 +12,8 @@ export enum ApiMsg {
     UPDATE_SUCCESS = '更新成功',
     ADD_SUCCESS = '新增成功',
     ADD_FAIL = '新增失败',
+    CHANGE_SUCCESS = '修改成功',
+    CHANGE_FAIL = '修改成功',
 }
 export enum ApiCode {
     SUCCESS = 200,

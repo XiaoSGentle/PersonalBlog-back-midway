@@ -10,7 +10,6 @@ export class StringUtils {
         ) {
             return true;
         }
-
         // 判断 value 是否为字符串，并检查是否为空字符串
         if (typeof value === 'string' && value.trim() === '') {
             return true;

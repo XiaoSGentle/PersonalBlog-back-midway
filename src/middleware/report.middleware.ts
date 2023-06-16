@@ -46,7 +46,7 @@ export class ReportMiddleware implements IMiddleware<Context, NextFunction> {
         logIn.creatTime = TimeUtil.GetNowTime();
         logIn.method = ctx.method; // 请求方法，GET或POST
         logIn.data = JSON.stringify(ctx.request.body);
-        if (ctx.URL.pathname.concat('login')) {
+        if (ctx.URL.pathname.concat('Login')) {
             logIn.userId = '用户登录';
         } else {
             logIn.userId = ctx.user.uuid;

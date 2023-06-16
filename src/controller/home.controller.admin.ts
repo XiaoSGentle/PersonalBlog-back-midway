@@ -51,7 +51,7 @@ export class HomeController {
     }
 
     @ApiOperation({ summary: '修改网站主页信息' })
-    @Put('/blogInfo', { summary: '修改网站主页信息' })
+    @Put('/blogInfo', { description: '修改网站主页信息' })
     @ApiBody({
         type: UpdateUserInfoParam,
     })
@@ -62,14 +62,14 @@ export class HomeController {
     }
 
     @ApiOperation({ summary: '获取首页所有可以随机的背景图' })
-    @Get('/allBgPic', { summary: '获取首页所有可以随机的背景图' })
+    @Get('/allBgPic', { description: '获取首页所有可以随机的背景图' })
     async getAllBgPic() {
         return ApiResult.ok(
             await this.bannerService.getAllBgPic(BannerEnums.HOME)
         );
     }
     @ApiOperation({ summary: '获取首页所有可以随机的名言' })
-    @Get('/allSaying', { summary: '获取首页所有可以随机的名言' })
+    @Get('/allSaying', { description: '获取首页所有可以随机的名言' })
     @ApiParam({
         name: 'classify',
         example: 'saying,myself',

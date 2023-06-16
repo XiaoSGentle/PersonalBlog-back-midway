@@ -28,7 +28,7 @@ export default (appInfo: MidwayAppInfo) => {
                     username: 'root',
                     password: 'chaoyang583355',
                     database: 'personal_blog',
-                    synchronize: false,
+                    synchronize: true,
                     logging: false,
                     entities: ['entity'],
                     charset: 'utf8mb4',

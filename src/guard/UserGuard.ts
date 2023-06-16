@@ -13,6 +13,12 @@ export class UserGuard implements IGuard<Context> {
         methodName: string
     ): Promise<boolean> {
         if (methodName === 'Login') return true;
+        // const a = await this.casbinEnforcerService.enforce(
+        //     '1',
+        //     '/api/pic::get',
+        //     '1'
+        // );
+        // error(a);
         // const re = await this.casbinEnforcerService.enforce(
         //     ctx.user.uuid,
         //     'domain',
