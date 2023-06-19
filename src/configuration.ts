@@ -1,4 +1,5 @@
 import * as casbin from '@midwayjs/casbin';
+import { CasbinEnforcerService } from '@midwayjs/casbin';
 import {
     App,
     Configuration,
@@ -16,12 +17,12 @@ import * as typeorm from '@midwayjs/typeorm';
 import * as upload from '@midwayjs/upload';
 import * as validate from '@midwayjs/validate';
 import { join } from 'path';
+import { REFRESHCASBIN_KEY } from './decorator';
 import { STATISTICS_KEY } from './decorator/statistics.decorator';
 import {
     ForbiddenFilter,
     TokenExpiredFilter,
     UnauthorizedFilter,
-    NoAuthorityFilter,
 } from './filter/identity.filter';
 import { NotFoundFilter } from './filter/notfound.filter';
 import { ValidateErrorFilter } from './filter/validate.filter';
@@ -29,8 +30,6 @@ import { UserGuard } from './guard/UserGuard';
 import { JwtMiddleware } from './middleware/jwt.middleware';
 import { ReportMiddleware } from './middleware/report.middleware';
 import { DictService } from './service/dict.service';
-import { REFRESHCASBIN_KEY } from './decorator';
-import { CasbinEnforcerService } from '@midwayjs/casbin';
 
 @Configuration({
     imports: [

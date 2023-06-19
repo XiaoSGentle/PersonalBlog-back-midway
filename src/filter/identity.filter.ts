@@ -29,6 +29,6 @@ export class JsonWebTokenFilter {
 @Catch(ForbiddenError)
 export class ForbiddenFilter {
     async catch() {
-        return ApiResult.fail(ApiCode.NO_AUTHYORITY, ApiMsg.NO_AUTHYORITY);
+        return ApiResult.fail(ApiCode.NO_AUTHORITY, ApiMsg.NO_AUTHYORITY);
     }
 }
