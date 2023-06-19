@@ -21,9 +21,9 @@ export enum ApiMsg {
 export enum ApiCode {
     SUCCESS = 200,
     TIP_SUCCESS = 299,
+    NO_AUTHORITY = 403,
     FAILE = 400,
     UNAUTHORIZED = 401,
-    NO_AUTHYORITY = '403',
     NOT_FOND_PATH = 404,
     VALIDATION_ERROR = 422,
     TOKEN_EXPIRED = 419,
