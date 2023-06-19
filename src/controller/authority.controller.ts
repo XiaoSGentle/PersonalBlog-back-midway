@@ -21,6 +21,8 @@ import {
 import { InjectEntityModel } from '@midwayjs/typeorm';
 import { Context } from 'koa';
 import { Repository } from 'typeorm';
+import { RefreshCasBin } from '../decorator';
+import { AddDepartParam } from '../dto/authority/AddDepartParam';
 import { AddRouterForDepartParam } from '../dto/authority/AddRouterForDepartParam';
 import { AddUserForDepartParam } from '../dto/authority/AddUserForDepartParam';
 import { SysDepart } from '../entity/SysDepart';
@@ -28,8 +30,6 @@ import { AuthorityService } from '../service/authority.service';
 import { BannerService } from '../service/banner.service';
 import { FileService } from '../service/file.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
-import { AddDepartParam } from '../dto/authority/AddDepartParam';
-import { RefreshCasBin } from '../decorator';
 
 @ApiBearerAuth()
 @ApiTags('管理员:权限管理')
@@ -119,7 +119,7 @@ export class AuthorityController {
     @RefreshCasBin()
     async delCasbinRule(@Query('uuid') uuid: string) {
         return ApiResult.delStatus(
-            (await this.casbinService.delete(uuid)).affected > 0 ? true : false
+            (await this.casbinService.delete(uuid)).affected > 0
         );
     }
     // 重置路由

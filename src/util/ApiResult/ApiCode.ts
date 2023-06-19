@@ -2,6 +2,7 @@
 export enum ApiMsg {
     LOGIN_SUCCESS = '登陆成功',
     LOGIN_FAIL = '登陆失败，请检查用户名或者密码',
+    NO_AUTHORITY = '没有权限',
     UNAUTHORIZED = '身份认证失败,请重新登录',
     NO_LOGIN = '未登录',
     NO_AUTHYORITY = '没有权限',

@@ -21,6 +21,7 @@ import {
     ForbiddenFilter,
     TokenExpiredFilter,
     UnauthorizedFilter,
+    NoAuthorityFilter,
 } from './filter/identity.filter';
 import { NotFoundFilter } from './filter/notfound.filter';
 import { ValidateErrorFilter } from './filter/validate.filter';
