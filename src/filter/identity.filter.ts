@@ -1,9 +1,12 @@
 import { Catch } from '@midwayjs/core';
-import { UnauthorizedError } from '@midwayjs/core/dist/error/http';
+import {
+    ForbiddenError,
+    UnauthorizedError,
+} from '@midwayjs/core/dist/error/http';
 import { Context } from '@midwayjs/koa';
+import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { ApiCode, ApiMsg } from '../util/ApiResult/ApiCode';
 import { ApiResult } from '../util/ApiResult/ApiResult';
-import { TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 
 @Catch(UnauthorizedError)
 export class UnauthorizedFilter {
@@ -22,5 +25,11 @@ export class TokenExpiredFilter {
 export class JsonWebTokenFilter {
     async catch(err: Error, ctx: Context) {
         return ApiResult.fail(ApiCode.TOKEN_INVALID, ApiMsg.TOKEN_INVALID);
+    }
+}
+@Catch(ForbiddenError)
+export class NoAuthorityFilter {
+    async catch(err: Error, ctx: Context) {
+        return ApiResult.fail(ApiCode.NO_AUTHORITY, ApiMsg.NO_AUTHORITY);
     }
 }

@@ -4,7 +4,6 @@ import {
     Del,
     Get,
     Inject,
-    Param,
     Post,
     Put,
     Query,
@@ -104,15 +103,15 @@ export class HomeController {
     }
 
     @ApiOperation({ summary: '删除一条名言' })
-    @Del('/saying/:uuid', { description: '删除一条名言' })
-    async delSaying(@Param('uuid') uuid: string) {
+    @Del('/saying', { description: '删除一条名言' })
+    async delSaying(@Query('uuid') uuid: string) {
         return ApiResult.delStatus(
             (await this.proverbService.homeModel.delete(uuid)) ? true : false
         );
     }
     @ApiOperation({ summary: '获取一条名言' })
-    @Get('/saying/:uuid', { description: '获取一条名言' })
-    async getSaying(@Param('uuid') uuid: string) {
+    @Get('/saying', { description: '获取一条名言' })
+    async getSaying(@Query('uuid') uuid: string) {
         return ApiResult.ok(
             await this.proverbService.homeModel.findOne({
                 where: { uuid: uuid },

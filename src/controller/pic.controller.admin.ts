@@ -4,7 +4,6 @@ import {
     Del,
     Get,
     Inject,
-    Param,
     Post,
     Put,
     Query,
@@ -56,8 +55,8 @@ export default class AdminPicController {
         );
     }
     @ApiOperation({ summary: '根据uuid获取照片' })
-    @Get('/:uuid', { description: '根据uuid获取照片' })
-    async getPicsByUUID(@Param('uuid') uuid: string) {
+    @Get('/', { description: '根据uuid获取照片' })
+    async getPicsByUUID(@Query('uuid') uuid: string) {
         return ApiResult.ok(
             await this.photoService.photoModel.findOne({
                 where: { uuid: uuid },
@@ -66,15 +65,15 @@ export default class AdminPicController {
     }
 
     @ApiOperation({ summary: '根据uuid删除照片' })
-    @Del('/:uuid', { description: '根据uuid删除照片' })
-    async delPicsByPos(@Param('uuid') uuid: string) {
+    @Del('/', { description: '根据uuid删除照片' })
+    async delPicsByPos(@Query('uuid') uuid: string) {
         return (await this.photoService.photoModel.delete(uuid)).affected > 0
             ? ApiResult.delStatus(true)
             : ApiResult.delStatus(false);
     }
     @ApiOperation({ summary: '改变照片的展示状态' })
-    @Put('/show/:uuid', { description: '根据uuid改变该照片的显示状态' })
-    async updatePicShowStatus(@Param('uuid') uuid: string) {
+    @Put('/show', { description: '根据uuid改变该照片的显示状态' })
+    async updatePicShowStatus(@Query('uuid') uuid: string) {
         const reSql: FunPhoto = await this.photoService.photoModel.findOne({
             where: { uuid: uuid },
         });

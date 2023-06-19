@@ -4,7 +4,6 @@ import {
     Del,
     Get,
     Inject,
-    Param,
     Post,
     Put,
     Query,
@@ -16,13 +15,13 @@ import {
     ApiOperation,
     ApiTags,
 } from '@midwayjs/swagger';
-import { UpdateNoteParam } from '../dto/note/UpdateNoteParam';
+import { AddStatisticsNum } from '../decorator/statistics.decorator';
+import { AddNoteParam } from '../dto/note/AddNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
+import { UpdateNoteParam } from '../dto/note/UpdateNoteParam';
+import { StatisticsEnums } from '../enum/FunEnums';
 import { NoteService } from '../service/note.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
-import { AddNoteParam } from '../dto/note/AddNoteParam';
-import { AddStatisticsNum } from '../decorator/statistics.decorator';
-import { StatisticsEnums } from '../enum/FunEnums';
 
 @ApiBearerAuth()
 @ApiTags('笔记')
@@ -40,8 +39,8 @@ export class NoteController {
      * @returns ApiResult
      */
     @ApiOperation({ summary: '获取笔记详情' })
-    @Get('/:uuid', { description: '根据uuid获取笔记详情' })
-    async getNotesByUuid(@Param('uuid') uuid: string) {
+    @Get('/', { description: '根据uuid获取笔记详情' })
+    async getNotesByUuid(@Query('uuid') uuid: string) {
         const re = await this.noteService.noteModel.findOne({
             where: { uuid: uuid },
         });
@@ -114,8 +113,8 @@ export class NoteController {
      * @returns 结果
      */
     @ApiOperation({ summary: '根据uuid删除笔记' })
-    @Del('/:uuid', { description: '根据uuid删除笔记' })
-    async delNoteByUuid(@Param('uuid') uuid: string) {
+    @Del('/', { description: '根据uuid删除笔记' })
+    async delNoteByUuid(@Query('uuid') uuid: string) {
         return (await this.noteService.noteModel.delete(uuid)).affected > 0
             ? ApiResult.delStatus(true)
             : ApiResult.delStatus(false); // 如果删除成功，返回成功的响

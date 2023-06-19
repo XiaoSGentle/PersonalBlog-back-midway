@@ -4,7 +4,6 @@ import {
     Del,
     Get,
     Inject,
-    Param,
     Post,
     Put,
     Query,
@@ -17,13 +16,13 @@ import {
     ApiTags,
 } from '@midwayjs/swagger';
 import { Context } from 'koa';
+import { AddHomeBannerParam } from '../dto/banner/AddHomeBannerParam';
 import { UpdataBannerParam } from '../dto/banner/UpdataBannerParam';
 import { SysBanner } from '../entity/SysBanner';
 import { BannerEnums } from '../enum/FunEnums';
 import { BannerService } from '../service/banner.service';
 import { FileService } from '../service/file.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
-import { AddHomeBannerParam } from '../dto/banner/AddHomeBannerParam';
 import { getUUID } from '../util/Other/Utils';
 
 @ApiBearerAuth()
@@ -77,8 +76,8 @@ export class BannerController {
     }
 
     @ApiOperation({ summary: '删除一张主页图片' })
-    @Del('/:uuid', { description: '删除一张主页图片' })
-    async delHomeBanner(@Param('uuid') uuid: string) {
+    @Del('/', { description: '删除一张主页图片' })
+    async delHomeBanner(@Query('uuid') uuid: string) {
         return ApiResult.delStatus(
             (await this.bannerService.bannerModel.delete(uuid)) ? true : false
         );

@@ -66,8 +66,6 @@ export class UserController {
     @ApiOperation({ summary: '测试专用' })
     @Get('/test', { description: '测试用接口' })
     async test() {
-        // this.dictService.addStatisticsNum(StatisticsEnums.ARTICLE);
-        // const routes = await this.webRouterService.getFlattenRouterTable();
-        // log(routes);
+        return '权限通过';
     }
 }

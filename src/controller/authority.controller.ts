@@ -7,7 +7,7 @@ import {
     Get,
     Inject,
     MidwayWebRouterService,
-    Param,
+    Post,
     Put,
     Query,
     RouterInfo,
@@ -66,6 +66,12 @@ export class AuthorityController {
     async getAllDepart() {
         return ApiResult.ok(await this.departService.find());
     }
+    @ApiOperation({ summary: '添加部门' })
+    @Post('/depart', { description: '添加部门' })
+    @ApiBody({ type: SysDepart })
+    async addDepart(@Body() depart: SysDepart) {
+        return ApiResult.ok(await this.departService.save(depart));
+    }
 
     @ApiOperation({ summary: '获取某个部门拥有的路由权限' })
     @Get('/depart/router', { description: '获取某个部门拥有的路由权限' })
@@ -119,10 +125,10 @@ export class AuthorityController {
         );
     }
     @ApiOperation({ summary: '删除一条规则' })
-    @Del('/depart/:uuid', { description: '删除一条规则⚡⚡⚡比较危险' })
-    async delCasbinRule(@Param('uuid') uuid: string) {
+    @Del('/depart', { description: '删除一条规则⚡⚡⚡比较危险' })
+    async delCasbinRule(@Query('uuid') uuid: string) {
         return ApiResult.delStatus(
-            (await this.casbinService.delete(uuid)).affected > 0 ? true : false
+            (await this.casbinService.delete(uuid)).affected > 0
         );
     }
     // 重置路由
@@ -144,27 +150,32 @@ export class AuthorityController {
             casbinRule.v1 = router.requestMethod;
             casbinRule.v2 = router.description;
             await this.casbinService.save(casbinRule);
-            // 为管理员添加所有的权限
+            // 为管理员组别添加所有的权限
             casbinRule.id =
                 router.fullUrl + '::' + router.requestMethod + '::admin';
             casbinRule.ptype = 'g2';
             casbinRule.v1 = 'admin_url';
             casbinRule.v2 = '';
-            this.casbinService.save(casbinRule);
+            await this.casbinService.save(casbinRule);
         });
         // 将用户id为1的管理员添加到管理部
         const casbinRule = new CasbinRule();
-        casbinRule.id = 'admin_1';
+        casbinRule.id = 'admin::1';
         casbinRule.ptype = 'g';
         casbinRule.v0 = '1';
         casbinRule.v1 = 'admin';
+        casbinRule.v2 = '系统管理员';
         await this.casbinService.save(casbinRule);
-        const casbinPartUrl = new CasbinRule();
-        casbinPartUrl.id = 'admin_url_part';
-        casbinPartUrl.ptype = 'p';
-        casbinPartUrl.v0 = 'admin';
-        casbinPartUrl.v1 = 'admin_url';
-        casbinPartUrl.v2 = '1';
-        this.casbinService.save(casbinPartUrl);
+        // 将权限组和部门权限绑定
+        const departs: SysDepart[] = await this.departService.find();
+        departs.forEach(async depart => {
+            const casbinPartUrl = new CasbinRule();
+            casbinPartUrl.id = depart.role + '_url_part';
+            casbinPartUrl.ptype = 'p';
+            casbinPartUrl.v0 = depart.role;
+            casbinPartUrl.v1 = depart.role + '_url';
+            casbinPartUrl.v2 = 'true';
+            await this.casbinService.save(casbinPartUrl);
+        });
     }
 }

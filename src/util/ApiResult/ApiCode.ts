@@ -1,6 +1,7 @@
 // 定义错误代码返回
 export enum ApiMsg {
     LOGIN_SUCCESS = '登陆成功',
+    NO_AUTHORITY = '没有权限',
     UNAUTHORIZED = '身份认证失败,请重新登录',
     NO_LOGIN = '未登录',
     NOT_FOND_PATH = '未找到该请求',
@@ -20,6 +21,7 @@ export enum ApiCode {
     TIP_SUCCESS = 299,
     FAILE = 400,
     UNAUTHORIZED = 401,
+    NO_AUTHORITY = 403,
     NOT_FOND_PATH = 404,
     VALIDATION_ERROR = 422,
     TOKEN_EXPIRED = 419,

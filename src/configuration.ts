@@ -20,6 +20,7 @@ import { STATISTICS_KEY } from './decorator/statistics.decorator';
 import {
     TokenExpiredFilter,
     UnauthorizedFilter,
+    NoAuthorityFilter,
 } from './filter/identity.filter';
 import { NotFoundFilter } from './filter/notfound.filter';
 import { ValidateErrorFilter } from './filter/validate.filter';
@@ -63,6 +64,7 @@ export class ContainerLifeCycle {
             ValidateErrorFilter,
             TokenExpiredFilter,
             UnauthorizedFilter,
+            NoAuthorityFilter,
         ]);
         // 使用管道
         this.app.useGuard(UserGuard);
