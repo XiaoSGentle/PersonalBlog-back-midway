@@ -18,6 +18,7 @@ import * as validate from '@midwayjs/validate';
 import { join } from 'path';
 import { STATISTICS_KEY } from './decorator/statistics.decorator';
 import {
+    ForbiddenFilter,
     TokenExpiredFilter,
     UnauthorizedFilter,
 } from './filter/identity.filter';
@@ -27,6 +28,8 @@ import { UserGuard } from './guard/UserGuard';
 import { JwtMiddleware } from './middleware/jwt.middleware';
 import { ReportMiddleware } from './middleware/report.middleware';
 import { DictService } from './service/dict.service';
+import { REFRESHCASBIN_KEY } from './decorator';
+import { CasbinEnforcerService } from '@midwayjs/casbin';
 
 @Configuration({
     imports: [
@@ -54,6 +57,9 @@ export class ContainerLifeCycle {
     @Inject()
     dictService: DictService;
 
+    @Inject()
+    casbinEnforcerService: CasbinEnforcerService;
+
     async onReady() {
         // 使用中间件
         this.app.useMiddleware([ReportMiddleware, JwtMiddleware]);
@@ -63,6 +69,7 @@ export class ContainerLifeCycle {
             ValidateErrorFilter,
             TokenExpiredFilter,
             UnauthorizedFilter,
+            ForbiddenFilter,
         ]);
         // 使用管道
         this.app.useGuard(UserGuard);
@@ -71,6 +78,13 @@ export class ContainerLifeCycle {
             return {
                 before: async () => {
                     this.dictService.addStatisticsNum(option.metadata.key);
+                },
+            };
+        });
+        this.decoratorService.registerMethodHandler(REFRESHCASBIN_KEY, () => {
+            return {
+                after: async () => {
+                    await this.casbinEnforcerService.loadPolicy();
                 },
             };
         });

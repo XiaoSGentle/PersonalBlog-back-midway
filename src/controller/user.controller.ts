@@ -1,3 +1,4 @@
+import { CasbinEnforcerService } from '@midwayjs/casbin';
 import {
     Body,
     Controller,
@@ -17,6 +18,7 @@ import { DictService } from '../service/dict.service';
 import { UserService } from '../service/user.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
 import { JwtUtil } from '../util/Jwt/Jwt';
+import { AuthorityService } from '../service/authority.service';
 
 @ApiTags('用户')
 @Controller('/')
@@ -31,7 +33,12 @@ export class UserController {
     webRouterService: MidwayWebRouterService;
 
     @Inject()
+    casbinEnforcerService: CasbinEnforcerService;
+
+    @Inject()
     infoService: InfoService;
+    @Inject()
+    authorityService: AuthorityService;
 
     @Inject()
     jwtUtil: JwtUtil;
@@ -40,21 +47,16 @@ export class UserController {
     dictService: DictService;
 
     @ApiOperation({ summary: '用户登录' })
-    @Post('/Login', { description: '用户登录' })
+    @Post('/Login', { description: '功能:用户:用户登录' })
     @ApiBody({
         type: LoginParam,
     })
     async Login(@Body() user: LoginParam): Promise<ApiResult> {
-        const result = await this.userService.Login(user);
-        result.password = '';
-        return ApiResult.ok({
-            userInfo: result,
-            token: await this.jwtUtil.jwtSign({ uuid: result.uuid }),
-        });
+        return await this.userService.Login(user);
     }
     @AddStatisticsNum(StatisticsEnums.SING_IN)
     @ApiOperation({ summary: '用户创建' })
-    @Post('/addUser', { description: '用户注册' })
+    @Post('/addUser', { description: '功能:用户:用户注册' })
     @ApiBody({
         type: CerateUserParam,
     })
@@ -63,11 +65,11 @@ export class UserController {
         return ApiResult.ok(result);
     }
 
-    @ApiOperation({ summary: '测试专用' })
-    @Get('/test', { description: '测试用接口' })
-    async test() {
-        // this.dictService.addStatisticsNum(StatisticsEnums.ARTICLE);
-        // const routes = await this.webRouterService.getFlattenRouterTable();
-        // log(routes);
+    @ApiOperation({ summary: '权限获取' })
+    @Get('/getAuthority', { description: '功能:用户:获取登陆用户的权限' })
+    async getAuthority(ctx: Context) {
+        return ApiResult.ok(
+            await this.authorityService.getAuthorityByUuid(ctx.user.uuid)
+        );
     }
 }

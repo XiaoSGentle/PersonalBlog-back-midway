@@ -1,12 +1,11 @@
 import { createCustomMethodDecorator } from '@midwayjs/core';
 
-export const AUTHOR_KEY = 'decorator:statistics_key';
+export const REFRESHCASBIN_KEY = 'decorator:refreshcasbin_key';
 
 /**
- * 创建添加统计次数的注解
- * @param key 需要添加的类型枚举
+ * 刷新casbin权限
  * @returns ？？？
  */
-export function Author(key: string[]): MethodDecorator {
-    return createCustomMethodDecorator(AUTHOR_KEY, { key });
+export function RefreshCasBin(): MethodDecorator {
+    return createCustomMethodDecorator(REFRESHCASBIN_KEY, {});
 }

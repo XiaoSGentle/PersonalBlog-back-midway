@@ -12,7 +12,7 @@ export class AdminLogController {
     logService: LogService;
 
     @ApiOperation({ summary: '获取所有日志信息' })
-    @Get('/', { description: '获取所有日志信息' })
+    @Get('/', { description: '管理员:日志:获取所有日志信息' })
     async getLogs(@Query() pageParam: Pageparam) {
         return ApiResult.ok(await this.logService.getSysLogs(pageParam));
     }

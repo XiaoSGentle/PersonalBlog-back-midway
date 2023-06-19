@@ -4,7 +4,6 @@ import {
     Del,
     Get,
     Inject,
-    Param,
     Post,
     Put,
     Query,
@@ -16,13 +15,13 @@ import {
     ApiOperation,
     ApiTags,
 } from '@midwayjs/swagger';
-import { UpdateNoteParam } from '../dto/note/UpdateNoteParam';
+import { AddStatisticsNum } from '../decorator/statistics.decorator';
+import { AddNoteParam } from '../dto/note/AddNoteParam';
 import { GetNoteParam } from '../dto/note/GetNoteParam';
+import { UpdateNoteParam } from '../dto/note/UpdateNoteParam';
+import { StatisticsEnums } from '../enum/FunEnums';
 import { NoteService } from '../service/note.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
-import { AddNoteParam } from '../dto/note/AddNoteParam';
-import { AddStatisticsNum } from '../decorator/statistics.decorator';
-import { StatisticsEnums } from '../enum/FunEnums';
 
 @ApiBearerAuth()
 @ApiTags('笔记')
@@ -40,8 +39,8 @@ export class NoteController {
      * @returns ApiResult
      */
     @ApiOperation({ summary: '获取笔记详情' })
-    @Get('/:uuid', { description: '根据uuid获取笔记详情' })
-    async getNotesByUuid(@Param('uuid') uuid: string) {
+    @Get('/', { description: '功能:笔记:根据uuid获取笔记详情' })
+    async getNotesByUuid(@Query('uuid') uuid: string) {
         const re = await this.noteService.noteModel.findOne({
             where: { uuid: uuid },
         });
@@ -57,7 +56,7 @@ export class NoteController {
      * @returns ApiResult
      */
     @ApiOperation({ summary: '新增笔记' })
-    @Post('/', { description: '新增笔记' })
+    @Post('/', { description: '功能:笔记:新增笔记' })
     @ApiBody({
         type: AddNoteParam,
     })
@@ -71,7 +70,7 @@ export class NoteController {
      */
     @AddStatisticsNum(StatisticsEnums.ARTICLE)
     @ApiOperation({ summary: '更新笔记' })
-    @Put('/', { description: '更新笔记' })
+    @Put('/', { description: '功能:笔记:更新笔记' })
     @ApiBody({
         type: UpdateNoteParam,
     })
@@ -84,7 +83,7 @@ export class NoteController {
      * @returns 结果
      */
     @ApiOperation({ summary: '获取笔记列表' })
-    @Get('/all', { description: '获取笔记列表' })
+    @Get('/all', { description: '功能:笔记:获取笔记列表' })
     @ApiBody({
         type: GetNoteParam,
     })
@@ -96,7 +95,7 @@ export class NoteController {
      * @returns 结果
      */
     @ApiOperation({ summary: '获取笔记分类标签' })
-    @Get('/classify', { description: '获取笔记的分类标签' })
+    @Get('/classify', { description: '功能:笔记:获取笔记的分类标签' })
     async getAllNoteClassify() {
         return ApiResult.ok(await this.noteService.getAllNoteClassify());
     }
@@ -105,7 +104,7 @@ export class NoteController {
      * @returns 结果
      */
     @ApiOperation({ summary: '获取登录用户的笔记' })
-    @Get('/user', { description: '获取登录用户的所有笔记' })
+    @Get('/user', { description: '功能:笔记:获取登录用户的所有笔记' })
     async getNotesByUser() {
         return ApiResult.ok(await this.noteService.getAllNoteByUser());
     }
@@ -114,8 +113,8 @@ export class NoteController {
      * @returns 结果
      */
     @ApiOperation({ summary: '根据uuid删除笔记' })
-    @Del('/:uuid', { description: '根据uuid删除笔记' })
-    async delNoteByUuid(@Param('uuid') uuid: string) {
+    @Del('/', { description: '功能:笔记:根据uuid删除笔记' })
+    async delNoteByUuid(@Query('uuid') uuid: string) {
         return (await this.noteService.noteModel.delete(uuid)).affected > 0
             ? ApiResult.delStatus(true)
             : ApiResult.delStatus(false); // 如果删除成功，返回成功的响

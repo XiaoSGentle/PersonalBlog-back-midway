@@ -1,4 +1,4 @@
-import { Controller, Del, Inject, Param } from '@midwayjs/core';
+import { Controller, Del, Inject, Query } from '@midwayjs/core';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@midwayjs/swagger';
 import { MessageService } from '../service/message.service';
 import { ApiResult } from '../util/ApiResult/ApiResult';
@@ -15,8 +15,8 @@ export class AdminMessageController {
      * @returns
      */
     @ApiOperation({ summary: '删除留言' })
-    @Del('/:uuid', { description: '根据uuid删除留言' })
-    async delMessage(@Param('uuid') param: string) {
+    @Del('/', { description: '管理员:留言:根据uuid删除留言' })
+    async delMessage(@Query('uuid') param: string) {
         return (await this.messageService.messageModel.delete(param)).affected >
             0
             ? ApiResult.delStatus(true)

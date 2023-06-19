@@ -18,14 +18,12 @@ export class StringUtils {
         return false;
     }
 }
-
 export function getUUID() {
     const timestamp = new Date().getTime();
     const uuid =
         timestamp.toString() + Math.floor(Math.random() * 10).toString();
     return uuid.substr(-19);
 }
-
 export class TimeUtil {
     static GetNowTime() {
         const date = new Date();

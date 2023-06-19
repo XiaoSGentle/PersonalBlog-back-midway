@@ -15,7 +15,7 @@ export class FileController {
     @Inject()
     fileService: FileService;
 
-    @Post('/upload', { description: '上传文件' })
+    @Post('/upload', { description: '工具:文件:上传文件' })
     async upload(@Files() files: any) {
         // TODO:仅限一个文件传输，后续更改
         const filePath: string = files[0].data;

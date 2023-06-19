@@ -22,7 +22,7 @@ export class PicController {
     @Inject()
     photoService: PhotoService;
     @ApiOperation({ summary: '根据分类随机获取照片' })
-    @Get('/', { description: '根据分类随机获取照片' })
+    @Get('/', { description: '功能:图集:根据分类随机获取照片' })
     async getPicsByPos(
         @Query('pic_grourment,pic_view,pic_about_me') classify: string
     ) {

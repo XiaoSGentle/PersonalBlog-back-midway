@@ -4,25 +4,11 @@ import { Rule, RuleType } from '@midwayjs/validate';
 export class AddUserForDepartParam {
     @Rule(RuleType.string().required())
     @ApiProperty({
-        description: '部门::用户uuid',
-        example: 'admin::1',
+        description: '部门名称',
     })
-    id: string;
+    departName: string;
 
-    @Rule(RuleType.string().required())
-    @ApiProperty({ description: '类型:本接口固定g', example: 'g' })
-    ptype: string;
-
-    @Rule(RuleType.string().required())
-    @ApiProperty({
-        description: '用户uuid',
-        example: '1',
-    })
-    v0: string;
-    @Rule(RuleType.string().required())
-    @ApiProperty({
-        description: '部门',
-        example: 'admin',
-    })
-    v1: string;
+    @Rule(RuleType.array().required())
+    @ApiProperty({ description: '用户列表' })
+    users: [];
 }

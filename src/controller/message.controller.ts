@@ -31,7 +31,7 @@ export class MessageController {
      * @returns 分页结果
      */
     @ApiOperation({ summary: '获取所有留言' })
-    @Get('/all', { description: '获取所有留言' })
+    @Get('/all', { description: '用户:留言:获取所有留言' })
     @ApiBody({
         type: Pageparam,
     })
@@ -46,7 +46,7 @@ export class MessageController {
      */
     @AddStatisticsNum(StatisticsEnums.MESSAGE)
     @ApiOperation({ summary: '添加留言' })
-    @Post('/', { description: '添加留言' })
+    @Post('/', { description: '用户:留言:添加留言' })
     @ApiBody({
         type: AddMessageParam,
     })

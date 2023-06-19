@@ -15,7 +15,7 @@ export class AdminStatisticalController {
     dictService: DictService;
 
     @ApiOperation({ summary: '获取服务器的运行信息' })
-    @Get('/sys', { description: '获取服务器的运行信息' })
+    @Get('/sys', { description: '管理员:统计:获取服务器的运行信息' })
     async getSysInfo() {
         const os = require('os');
         const ramUsage = 1 - os.freemem() / os.totalmem();

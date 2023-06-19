@@ -4,7 +4,6 @@ import {
     Del,
     Get,
     Inject,
-    Param,
     Post,
     Put,
     Query,
@@ -45,13 +44,13 @@ export class HomeController {
     bannerService: BannerService;
 
     @ApiOperation({ summary: '获取网站主页信息' })
-    @Get('/blogInfo', { description: '获取网站主页信息' })
+    @Get('/blogInfo', { description: '管理员:主页:获取网站主页信息' })
     async getBlogInfo() {
         return ApiResult.ok(await this.dictService.getBlogInfo());
     }
 
     @ApiOperation({ summary: '修改网站主页信息' })
-    @Put('/blogInfo', { description: '修改网站主页信息' })
+    @Put('/blogInfo', { description: '管理员:主页:修改网站主页信息' })
     @ApiBody({
         type: UpdateUserInfoParam,
     })
@@ -62,14 +61,18 @@ export class HomeController {
     }
 
     @ApiOperation({ summary: '获取首页所有可以随机的背景图' })
-    @Get('/allBgPic', { description: '获取首页所有可以随机的背景图' })
+    @Get('/allBgPic', {
+        description: '管理员:主页:获取首页所有可以随机的背景图',
+    })
     async getAllBgPic() {
         return ApiResult.ok(
             await this.bannerService.getAllBgPic(BannerEnums.HOME)
         );
     }
     @ApiOperation({ summary: '获取首页所有可以随机的名言' })
-    @Get('/allSaying', { description: '获取首页所有可以随机的名言' })
+    @Get('/allSaying', {
+        description: '管理员:主页:获取首页所有可以随机的名言',
+    })
     @ApiParam({
         name: 'classify',
         example: 'saying,myself',
@@ -78,7 +81,7 @@ export class HomeController {
         return ApiResult.ok(await this.proverbService.getAllSaying(classify));
     }
     @ApiOperation({ summary: '修改名言信息' })
-    @Put('/saying', { description: '修改名言信息' })
+    @Put('/saying', { description: '管理员:主页:修改名言信息' })
     @ApiBody({ type: UpProverParam })
     async updateBanner(@Body() upProverParam: UpProverParam) {
         const upParam = new FunHome();
@@ -90,7 +93,7 @@ export class HomeController {
     }
 
     @ApiOperation({ summary: '上传一条名言' })
-    @Post('/saying', { description: '上传一条名言' })
+    @Post('/saying', { description: '管理员:主页:上传一条名言' })
     @ApiBody({ type: AddProverParam })
     async upLoadHomeBanner(@Body() addProverParam: AddProverParam) {
         const addParam = new FunHome();
@@ -104,15 +107,15 @@ export class HomeController {
     }
 
     @ApiOperation({ summary: '删除一条名言' })
-    @Del('/saying/:uuid', { description: '删除一条名言' })
-    async delSaying(@Param('uuid') uuid: string) {
+    @Del('/saying/', { description: '管理员:主页:删除一条名言' })
+    async delSaying(@Query('uuid') uuid: string) {
         return ApiResult.delStatus(
             (await this.proverbService.homeModel.delete(uuid)) ? true : false
         );
     }
     @ApiOperation({ summary: '获取一条名言' })
-    @Get('/saying/:uuid', { description: '获取一条名言' })
-    async getSaying(@Param('uuid') uuid: string) {
+    @Get('/saying/', { description: '管理员:主页:获取一条名言' })
+    async getSaying(@Query('uuid') uuid: string) {
         return ApiResult.ok(
             await this.proverbService.homeModel.findOne({
                 where: { uuid: uuid },
